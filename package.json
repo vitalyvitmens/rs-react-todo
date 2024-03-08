@@ -15,8 +15,12 @@
     "@mantine/hooks": "^7.6.1",
     "@mantine/modals": "^7.6.1",
     "@mantine/notifications": "^7.6.1",
+    "@vitejs/plugin-react-swc": "^3.6.0",
+    "dexie": "^3.2.6",
+    "dexie-react-hooks": "^1.1.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "vite-plugin-pwa": "^0.19.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
