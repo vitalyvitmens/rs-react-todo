@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import todoLogo from './assets/todo.png'
 import bgImage from './assets/bgImage.jpg'
-import '@mantine/core/styles.css'
 import {
   BackgroundImage,
   Button,
@@ -11,6 +10,7 @@ import {
   Text,
   Title,
 } from '@mantine/core'
+import '@mantine/core/styles.css'
 
 function App() {
   const [count, setCount] = useState(0)

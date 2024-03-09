@@ -5,8 +5,7 @@ type Asset = string
 
 const staticCacheName: string = 'static-site-todo-v1'
 const dynamicCacheName: string = 'dynamic-site-todo-v1'
-
-const ASSETS: Asset[] = ['/', '/index.html', '/src/main.jsx', '/src/App.jsx']
+const ASSETS: Asset[] = ['/', '/index.html', '/src/main.tsx', '/src/App.tsx']
 
 //install event
 self.addEventListener('install', async (event: ExtendableEvent) => {
