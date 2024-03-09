@@ -1,22 +1,30 @@
 import Dexie, { Table } from 'dexie'
 
-export interface Friend {
-  id?: number
-  name: string
-  age: number
-}
-
-export class MySubClassedDexie extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
-  friends!: Table<Friend>
+class MyAppDatabase extends Dexie {
+  todos!: Table<ITodos, number>
+  users!: Table<IUsers, number>
 
   constructor() {
-    super('myDatabase')
-    this.version(1).stores({
-      friends: '++id, name, age', // Primary key and indexed props
+    super('TodoDB')
+    this.version(5).stores({
+      todos: '++id, title, description, date',
+      users: '++id, username, password',
     })
   }
 }
 
-export const db = new MySubClassedDexie()
+export interface ITodos {
+  id?: number
+  title: string
+  description: string
+  date: string
+}
+export interface IUsers {
+  id?: number
+  username: string
+  password: string
+}
+
+const db = new MyAppDatabase()
+
+export default db
