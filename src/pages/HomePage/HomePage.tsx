@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import todoLogo from '../../assets/todo.png'
-import bgImage from '../../assets/bgImage.jpg'
 import {
-  BackgroundImage,
   Button,
   Center,
   Container,
@@ -24,7 +22,7 @@ export const HomePage = () => {
   const textShadowMD = theme.shadows.md
 
   return (
-    <BackgroundImage src={bgImage} style={{ height: '100vh' }}>
+    <Container>
       <Center h={300}>
         <a
           href="https://github.com/vitalyvitmens/rs-react-todo"
@@ -95,6 +93,6 @@ export const HomePage = () => {
           Click on the Vite and React logos to learn more
         </Text>
       </Center>
-    </BackgroundImage>
+    </Container>
   )
 }
