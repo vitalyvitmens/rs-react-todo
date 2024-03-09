@@ -2,12 +2,12 @@ import { createTheme } from '@mantine/core'
 
 export const theme = createTheme({
   colors: {
-    note: [
+    todo: [
       '#FFFF00',
       '#008000',
       '#FFD97F',
       '#FFC94C',
-      '#FFB900',
+      '#A52A2A',
       '#0000FF',
       '#996F00',
       '#FF0000',
@@ -15,7 +15,7 @@ export const theme = createTheme({
       '#000000',
     ],
   },
-  primaryColor: 'note',
+  primaryColor: 'todo',
   primaryShade: { light: 0, dark: 9 },
   fontFamily: 'Open Sans, sans-serif',
   radius: {
