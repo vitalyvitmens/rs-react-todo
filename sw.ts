@@ -54,6 +54,6 @@ async function networkFirst(request: Request): Promise<Response> {
     return response
   } catch (error) {
     const cached: Response | undefined = await cache.match(request)
-    return cached ?? (await caches.match('/offline.html'))
+    return cached! ?? (await caches.match('/offline.html'))
   }
 }

@@ -14,13 +14,12 @@ const manifestForPlugin = {
     display: 'standalone' as Display | undefined,
     orientation: 'portrait' as
       | 'portrait'
-      | 'any'
+      | 'portrait-primary'
+      | 'portrait-secondary'
       | 'natural'
       | 'landscape'
       | 'landscape-primary'
-      | 'landscape-secondary'
-      | 'portrait-primary'
-      | 'portrait-secondary',
+      | 'landscape-secondary',
     scope: '/',
     id: '/',
     start_url: '/',
