@@ -8,7 +8,7 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage'
 import { Offline } from './pages/Offline/Offline'
 import { NewTodo } from './pages/NewTodo/NewTodo'
 // import { AuthProvider } from './context/AuthContext'
-// import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+// import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 // import { TodoProvider } from './context/TodoContext'
 
 function App() {
