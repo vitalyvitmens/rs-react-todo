@@ -8,15 +8,20 @@ import {
   Container,
   Text,
   Title,
+  useMantineTheme,
 } from '@mantine/core'
 import '@mantine/core/styles.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const theme = useMantineTheme()
 
   return (
-    <BackgroundImage src={bgImage} style={{ height: '100vh' }}>
-      <Center h={350}>
+    <BackgroundImage
+      src={bgImage}
+      style={{ height: '100vh' }}
+    >
+      <Center h={300}>
         <a
           href="https://github.com/vitalyvitmens/rs-react-todo"
           target="_blank"
@@ -24,6 +29,12 @@ function App() {
           <img src={todoLogo} alt="ToDo" style={{ width: '300px' }} />
         </a>
       </Center>
+      <Container c="yellow" ta="center" mt={-60}>
+        <h1>Hello, Mantine!</h1>
+        <p>Your primary color is {theme.colors[theme.primaryColor][0]}</p>
+        <Button color="primary">This button has the note color</Button>
+      </Container>
+
       <Center c="#fff">
         <Title size="4rem" c="blue">
           ToDo
@@ -32,7 +43,7 @@ function App() {
       <Center color="red">
         <Button
           justify="center"
-          fullWidth
+          w={320}
           ml={10}
           mr={10}
           variant="default"
@@ -54,7 +65,7 @@ function App() {
       >
         Edit <code>src/App.tsx</code> and save to test HMR
       </Container>
-      <Center h={100} p={20}>
+      <Center h={100} p={20} mt={-15}>
         <Text c="red" size="xl" fw={800} fs="italic" td="underline" ta="center">
           Click on the Vite and React logos to learn more
         </Text>
