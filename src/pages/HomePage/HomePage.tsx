@@ -8,7 +8,6 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core'
-import '@mantine/core/styles.css'
 
 export const HomePage = () => {
   const [count, setCount] = useState(0)
