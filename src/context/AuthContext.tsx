@@ -7,8 +7,8 @@ interface AuthContextType {
   isLoading: boolean
   isSuccess: boolean
   isError: boolean
-  logIn: (newUser: IUsers, cb: () => void) => void
-  logOut: (cb: () => void) => void
+  logIn: (newUser: IUsers, callback: () => void) => void
+  logOut: (callback: () => void) => void
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: IProviderProps) => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 
-  const logIn = async (newUser: IUsers, cb: () => void) => {
+  const logIn = async (newUser: IUsers, callback: () => void) => {
     setIsLoading(true)
     const user = await getUser(newUser)
     if (typeof user === 'undefined') {
@@ -43,13 +43,13 @@ export const AuthProvider = ({ children }: IProviderProps) => {
       localStorage.setItem('user', JSON.stringify(user))
       setIsLoading(false)
       setUser(user)
-      cb()
+      callback()
     }
   }
-  const logOut = (cb: () => void) => {
+  const logOut = (callback: () => void) => {
     setUser(undefined)
     localStorage.removeItem('user')
-    cb()
+    callback()
   }
 
   const value = {

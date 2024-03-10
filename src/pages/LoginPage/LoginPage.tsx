@@ -1,3 +1,7 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { loginUser } from '../../manageAuth'
 import { useForm } from '@mantine/form'
 import {
   Group,
@@ -10,6 +14,9 @@ import {
 import { notifications } from '@mantine/notifications'
 
 export const LoginPage = () => {
+  const { user, logIn, isLoading, isSuccess, isError } = useAuth()
+  const navigate = useNavigate()
+  console.log('####: user', user)
   const form = useForm({
     initialValues: { username: '', password: '' },
     validate: {
@@ -18,6 +25,12 @@ export const LoginPage = () => {
       password: (value) => (value ? null : 'Invalid password'),
     },
   })
+
+  useEffect(() => {
+    if (user?.username !== undefined) {
+      navigate('/', { replace: true })
+    }
+  }, [navigate, user])
 
   const handleError = (errors: typeof form.errors) => {
     if (errors.username) {
@@ -33,12 +46,18 @@ export const LoginPage = () => {
     }
   }
 
+  const handleSubmit = form.onSubmit((values) =>
+    loginUser(values, () => {
+      logIn(values, () => navigate('/', { replace: true }))
+    })
+  )
+
   return (
     <Box maw={340} mx="auto" mt={100}>
       <Title ta="center" c="#0000FF">
         Authorization
       </Title>
-      <form onSubmit={form.onSubmit(console.log, handleError)}>
+      <form onSubmit={handleSubmit}>
         <TextInput
           radius={5}
           c="#FFC94C"

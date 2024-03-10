@@ -6,9 +6,9 @@ class MyAppDatabase extends Dexie {
 
   constructor() {
     super('TodosDB')
-    this.version(5).stores({
+    this.version(6).stores({
       todos: '++id, title, description, date',
-      users: '++id, username, password',
+      users: '++id, [username+password]',
     })
   }
 }
@@ -27,7 +27,5 @@ export interface IUsers {
 
 const db = new MyAppDatabase()
 console.log(db)
-console.log(db.todos)
-console.log(db.users)
 
 export default db

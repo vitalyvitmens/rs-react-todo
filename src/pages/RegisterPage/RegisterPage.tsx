@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { registerUser } from '../../manageAuth'
 import { useForm } from '@mantine/form'
 import {
   PasswordInput,
@@ -9,6 +12,9 @@ import {
 } from '@mantine/core'
 
 export const RegisterPage = () => {
+  const { user } = useAuth()
+  const navigate = useNavigate()
+  console.log('####: user', user)
   const form = useForm({
     initialValues: {
       username: '',
@@ -25,12 +31,16 @@ export const RegisterPage = () => {
     },
   })
 
+  const handleSubmit = form.onSubmit(({ username, password }) =>
+    registerUser({ username, password }, () => navigate('/login'))
+  )
+
   return (
     <Box maw={340} mx="auto" mt={100}>
       <Title ta="center" c="#0000FF">
         Registration
       </Title>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={handleSubmit}>
         <TextInput
           radius={5}
           c="#FFC94C"
