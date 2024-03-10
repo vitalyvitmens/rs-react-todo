@@ -55,7 +55,7 @@ export const LoginPage = () => {
         />
         <Group justify="flex-end" mt="md">
           <Button type="submit" bg="#006400" radius={5}>
-            Submit
+            Login
           </Button>
         </Group>
       </form>
