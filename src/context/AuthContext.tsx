@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useState } from 'react'
-import { IUsers } from '../../db'
-import { getUser } from '../../manageAuth'
+import { IUsers } from '../db'
+import { getUser } from '../manageAuth'
 
 interface AuthContextType {
   user: IUsers | undefined
