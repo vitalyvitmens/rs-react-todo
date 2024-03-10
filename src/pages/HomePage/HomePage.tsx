@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import todoLogo from '../../assets/todo.png'
+import { useAuth } from '../../hooks/useAuth'
 import {
   Button,
   Center,
   Container,
+  Group,
   Text,
   Title,
   useMantineTheme,
 } from '@mantine/core'
 
 export const HomePage = () => {
+  const { logOut } = useAuth()
   const [count, setCount] = useState(0)
   const theme = useMantineTheme()
   const colorGreen = theme.colors[theme.primaryColor][1]
@@ -20,9 +23,22 @@ export const HomePage = () => {
   const colorRed = theme.colors[theme.primaryColor][7]
   const textShadowMD = theme.shadows.md
 
+  const handleLogout = () => logOut(() => {})
+
   return (
     <Container>
-      <Center h={300}>
+      <Group justify="end">
+        <Button
+          onClick={handleLogout}
+          variant="outline"
+          mt={10}
+          size="sm"
+          radius={15}
+        >
+          Logout
+        </Button>
+      </Group>
+      <Center h={290}>
         <a
           href="https://github.com/vitalyvitmens/rs-react-todo"
           target="_blank"

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { loginUser } from '../../manageAuth'
@@ -10,13 +10,16 @@ import {
   Button,
   Box,
   Title,
+  NavLink,
 } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 
 export const LoginPage = () => {
   const { user, logIn, isLoading, isSuccess, isError } = useAuth()
   const navigate = useNavigate()
   console.log('####: user', user)
+  console.log('####: isLoading', isLoading)
+  console.log('####: isSuccess', isSuccess)
+  console.log('####: isError', isError)
   const form = useForm({
     initialValues: { username: '', password: '' },
     validate: {
@@ -26,25 +29,11 @@ export const LoginPage = () => {
     },
   })
 
-  useEffect(() => {
-    if (user?.username !== undefined) {
-      navigate('/', { replace: true })
-    }
-  }, [navigate, user])
-
-  const handleError = (errors: typeof form.errors) => {
-    if (errors.username) {
-      notifications.show({
-        message: 'Please fill username field',
-        color: 'red',
-      })
-    } else if (errors.password) {
-      notifications.show({
-        message: 'Please provide a valid password',
-        color: 'red',
-      })
-    }
-  }
+  // useEffect(() => {
+  //   if (user?.username !== undefined) {
+  //     navigate('/', { replace: true })
+  //   }
+  // }, [navigate, user])
 
   const handleSubmit = form.onSubmit((values) =>
     loginUser(values, () => {
@@ -72,8 +61,16 @@ export const LoginPage = () => {
           placeholder="Password"
           {...form.getInputProps('password')}
         />
-        <Group justify="flex-end" mt="md">
-          <Button type="submit" bg="#006400" radius={5}>
+        <Group wrap="nowrap" mt="md">
+          <NavLink
+            href="/register"
+            label="Ещё не зарегистрированы?"
+            variant="subtle"
+            active
+            c="#FF0000"
+            fw="bold"
+          />
+          <Button type="submit" w="120px" bg="#006400" radius={5}>
             Login
           </Button>
         </Group>

@@ -9,6 +9,7 @@ import {
   Button,
   Box,
   Title,
+  NavLink,
 } from '@mantine/core'
 
 export const RegisterPage = () => {
@@ -62,8 +63,16 @@ export const RegisterPage = () => {
           placeholder="Confirm password"
           {...form.getInputProps('confirmPassword')}
         />
-        <Group justify="flex-end" mt="md">
-          <Button type="submit" bg="#006400" radius={5}>
+        <Group wrap="nowrap" mt="md">
+          <NavLink
+            href="/login"
+            label="Уже зарегистрированы?"
+            variant="subtle"
+            active
+            c="#FF0000"
+            fw="bold"
+          />
+          <Button type="submit" w="120px" bg="#006400" radius={5}>
             Register
           </Button>
         </Group>
