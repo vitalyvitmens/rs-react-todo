@@ -1,45 +1,54 @@
 import { useForm } from '@mantine/form'
-import { NumberInput, TextInput, Button, Box } from '@mantine/core'
+import { Group, PasswordInput, TextInput, Button, Box } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 
 export const LoginPage = () => {
   const form = useForm({
-    initialValues: { name: '', email: '', age: 0 },
-
-    // functions will be used to validate values at corresponding key
+    initialValues: { username: '', password: '' },
     validate: {
-      name: (value) =>
-        value.length < 2 ? 'Name must have at least 2 letters' : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      age: (value) =>
-        value < 18 ? 'You must be at least 18 to register' : null,
+      username: (value) =>
+        value.length < 2 ? 'Username must have at least 2 letters' : null,
+      password: (value) => (value ? null : 'Invalid password'),
     },
   })
 
+  const handleError = (errors: typeof form.errors) => {
+    if (errors.username) {
+      notifications.show({
+        message: 'Please fill username field',
+        color: 'red',
+      })
+    } else if (errors.password) {
+      notifications.show({
+        message: 'Please provide a valid password',
+        color: 'red',
+      })
+    }
+  }
+
   return (
     <Box maw={340} mx="auto">
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={form.onSubmit(console.log, handleError)}>
         <TextInput
-          label="Name"
-          placeholder="Name"
-          {...form.getInputProps('name')}
-        />
-        <TextInput
+          radius={5}
           mt="sm"
-          label="Email"
-          placeholder="Email"
-          {...form.getInputProps('email')}
+          c="#FFC94C"
+          label="Username"
+          placeholder="Username"
+          {...form.getInputProps('username')}
         />
-        <NumberInput
-          mt="sm"
-          label="Age"
-          placeholder="Age"
-          min={0}
-          max={99}
-          {...form.getInputProps('age')}
+        <PasswordInput
+          radius={5}
+          c="#FFC94C"
+          label="Password"
+          placeholder="Password"
+          {...form.getInputProps('password')}
         />
-        <Button type="submit" mt="sm">
-          Submit
-        </Button>
+        <Group justify="flex-end" mt="md">
+          <Button type="submit" bg="#008000" radius={5}>
+            Submit
+          </Button>
+        </Group>
       </form>
     </Box>
   )
