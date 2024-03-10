@@ -26,27 +26,21 @@ export const HomePage = () => {
   const handleLogout = () => logOut(() => {})
 
   return (
-    <Container>
+    <Container p={16}>
       <Group justify="end">
-        <Button
-          onClick={handleLogout}
-          variant="outline"
-          mt={10}
-          size="sm"
-          radius={15}
-        >
+        <Button onClick={handleLogout} variant="outline" size="sm" radius={15}>
           Logout
         </Button>
       </Group>
-      <Center h={290}>
+      <Center>
         <a
           href="https://github.com/vitalyvitmens/rs-react-todo"
           target="_blank"
         >
-          <img src={todoLogo} alt="ToDo" style={{ width: '300px' }} />
+          <img src={todoLogo} alt="ToDo" style={{ width: '230px' }} />
         </a>
       </Center>
-      <Container c={colorYellow} ta="center" mt={-30}>
+      <Container c={colorYellow} ta="center">
         <Title c={colorLightOrange} style={{ textShadow: textShadowMD }}>
           Hello, Mantine!
         </Title>
@@ -65,8 +59,6 @@ export const HomePage = () => {
         <Button
           justify="center"
           w={320}
-          ml={10}
-          mr={10}
           variant="default"
           bg={colorGreen}
           onClick={() => setCount((count) => count + 1)}
