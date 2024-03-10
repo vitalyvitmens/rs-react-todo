@@ -1,5 +1,12 @@
 import { useForm } from '@mantine/form'
-import { Group, PasswordInput, TextInput, Button, Box } from '@mantine/core'
+import {
+  Group,
+  PasswordInput,
+  TextInput,
+  Button,
+  Box,
+  Title,
+} from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 
 export const LoginPage = () => {
@@ -27,11 +34,13 @@ export const LoginPage = () => {
   }
 
   return (
-    <Box maw={340} mx="auto">
+    <Box maw={340} mx="auto" mt={100}>
+      <Title ta="center" c="#0000FF">
+        Authorization
+      </Title>
       <form onSubmit={form.onSubmit(console.log, handleError)}>
         <TextInput
           radius={5}
-          mt="sm"
           c="#FFC94C"
           label="Username"
           placeholder="Username"
@@ -45,7 +54,7 @@ export const LoginPage = () => {
           {...form.getInputProps('password')}
         />
         <Group justify="flex-end" mt="md">
-          <Button type="submit" bg="#008000" radius={5}>
+          <Button type="submit" bg="#006400" radius={5}>
             Submit
           </Button>
         </Group>

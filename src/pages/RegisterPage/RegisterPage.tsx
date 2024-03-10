@@ -1,5 +1,12 @@
 import { useForm } from '@mantine/form'
-import { PasswordInput, Group, TextInput, Button, Box } from '@mantine/core'
+import {
+  PasswordInput,
+  Group,
+  TextInput,
+  Button,
+  Box,
+  Title,
+} from '@mantine/core'
 
 export const RegisterPage = () => {
   const form = useForm({
@@ -19,11 +26,13 @@ export const RegisterPage = () => {
   })
 
   return (
-    <Box maw={340} mx="auto">
+    <Box maw={340} mx="auto" mt={100}>
+      <Title ta="center" c="#0000FF">
+        Registration
+      </Title>
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
         <TextInput
           radius={5}
-          mt="sm"
           c="#FFC94C"
           label="Username"
           placeholder="Username"
@@ -44,7 +53,7 @@ export const RegisterPage = () => {
           {...form.getInputProps('confirmPassword')}
         />
         <Group justify="flex-end" mt="md">
-          <Button type="submit" bg="#008000" radius={5}>
+          <Button type="submit" bg="#006400" radius={5}>
             Submit
           </Button>
         </Group>
