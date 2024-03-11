@@ -1,3 +1,4 @@
+/// <reference types="serviceworker" />
 /// <reference lib="webworker" />
 /// <reference lib="dom" />
 

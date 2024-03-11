@@ -26,7 +26,7 @@ export interface IProviderProps {
 
 export const AuthProvider = ({ children }: IProviderProps) => {
   const [user, setUser] = useState<IUsers | undefined>(
-    () => JSON.parse(localStorage.getItem('user') || '{}') || null
+    () => JSON.parse(localStorage.getItem('user-rs-react-todo') || '{}') || null
   )
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: IProviderProps) => {
       setIsError(true)
     } else {
       setIsSuccess(true)
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('user-rs-react-todo', JSON.stringify(user))
       setIsLoading(false)
       setUser(user)
       callback()
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: IProviderProps) => {
   }
   const logOut = (callback: () => void) => {
     setUser(undefined)
-    localStorage.removeItem('user')
+    localStorage.removeItem('user-rs-react-todo')
     callback()
   }
 
