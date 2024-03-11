@@ -1,11 +1,9 @@
 /// <reference types="serviceworker" />
-/// <reference lib="webworker" />
-/// <reference lib="dom" />
 
 type Asset = string
 
-const staticCacheName: string = 'static-site-todo-v1'
-const dynamicCacheName: string = 'dynamic-site-todo-v1'
+const staticCache: string = 'static-site-todo-v1'
+const dynamicCache: string = 'dynamic-site-todo-v1'
 const ASSETS: Asset[] = [
   '/',
   '/index.html',
@@ -14,39 +12,36 @@ const ASSETS: Asset[] = [
   '/src/App.tsx',
 ]
 
-//install event
-self.addEventListener('install', async (event: ExtendableEvent) => {
-  const cache: Cache = await caches.open(staticCacheName)
+// install event
+self.addEventListener('install', async () => {
+  const cache = await caches.open(staticCache)
   await cache.addAll(ASSETS)
-  event.waitUntil(self.skipWaiting())
 })
 
-//activate event
-self.addEventListener('activate', async (event: ExtendableEvent) => {
-  const cachesKeysArr: string[] = await caches.keys()
+// activate event
+self.addEventListener('activate', async () => {
+  const cacheKeysArr = await caches.keys()
   await Promise.all(
-    cachesKeysArr
-      .filter(
-        (key: string) => key !== staticCacheName && key !== dynamicCacheName
-      )
-      .map((key: string) => caches.delete(key))
+    cacheKeysArr
+      .filter((key) => key !== staticCache && key !== dynamicCache)
+      .map((key) => caches.delete(key))
   )
-  event.waitUntil(self.clients.claim())
 })
 
-//fetch event
+// fetch evenet
 self.addEventListener('fetch', (event: FetchEvent) => {
   event.respondWith(cacheFirst(event.request))
 })
 
 async function cacheFirst(request: Request): Promise<Response> {
-  const cached: Response | undefined = await caches.match(request)
+  const cached = await caches.match(request)
   try {
     return (
-      cached ??
+      cached ||
       (await fetch(request).then(() => {
         return networkFirst(request)
-      }))
+      })) ||
+      new Response()
     )
   } catch (error) {
     return networkFirst(request)
@@ -54,13 +49,13 @@ async function cacheFirst(request: Request): Promise<Response> {
 }
 
 async function networkFirst(request: Request): Promise<Response> {
-  const cache: Cache = await caches.open(dynamicCacheName)
+  const cache = await caches.open(dynamicCache)
   try {
-    const response: Response = await fetch(request)
+    const response = await fetch(request)
     await cache.put(request, response.clone())
     return response
   } catch (error) {
-    const cached: Response | undefined = await cache.match(request)
-    return cached! ?? (await caches.match('/offline'))
+    const cached = await cache.match(request)
+    return cached || (await caches.match('/offline')) || new Response()
   }
 }
