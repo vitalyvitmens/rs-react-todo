@@ -11,6 +11,8 @@ import {
   Box,
   Title,
   NavLink,
+  Center,
+  Loader,
 } from '@mantine/core'
 
 export const LoginPage = () => {
@@ -40,6 +42,14 @@ export const LoginPage = () => {
       logIn(values, () => navigate('/', { replace: true }))
     })
   )
+
+  if (isLoading) {
+    return (
+      <Center>
+        <Loader />
+      </Center>
+    )
+  }
 
   return (
     <Box maw={340} mx="auto" mt={100}>
