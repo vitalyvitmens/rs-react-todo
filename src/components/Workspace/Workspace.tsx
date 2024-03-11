@@ -2,7 +2,7 @@ import { Box, Button, Container, Input, Text } from '@mantine/core'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import SimpleMdeReact from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
-import { insertTodo } from '../../manageData'
+import { createTodo } from '../../manageData'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 
 const Workspace = () => {
@@ -21,7 +21,7 @@ const Workspace = () => {
   }, [])
 
   const onSubmint = () => {
-    insertTodo({ title, description: value, date: new Date().toString() })
+    createTodo({ title, description: value, date: new Date().toString() })
     onTodoAdd()
   }
 

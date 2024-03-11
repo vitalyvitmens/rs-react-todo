@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react'
 import { ITodos } from '../db'
-import { getTodo, getAllTodos, updateTodo } from '../manageData'
+import { readTodo, readTodos, updateTodo } from '../manageData'
 import { IProviderProps } from './AuthContext'
 
 interface TodosContextType {
@@ -61,7 +61,7 @@ export const TodoProvider = ({ children }: IProviderProps) => {
 
   const selectTodo = async (todoId: ITodos['id']) => {
     setIsLoading(true)
-    const todo = await getTodo(todoId)
+    const todo = await readTodo(todoId)
     if (typeof todo === 'undefined') {
       setIsLoading(false)
       setIsError(true)
@@ -76,7 +76,7 @@ export const TodoProvider = ({ children }: IProviderProps) => {
 
   const getTodos = async () => {
     setIsTodosLoading(true)
-    const todos = await getAllTodos()
+    const todos = await readTodos()
     if (typeof todo === 'undefined') {
       setIsTodosLoading(false)
       setIsTodosError(true)

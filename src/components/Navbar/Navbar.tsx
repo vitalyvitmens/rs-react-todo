@@ -16,7 +16,7 @@ import {
   IconSearch,
   IconPlus,
 } from '@tabler/icons-react'
-import classes from './Navbar.module.css'
+import styles from './Navbar.module.css'
 
 const links = [
   { icon: IconBulb, label: 'Activity', notifications: 3 },
@@ -38,13 +38,13 @@ const collections = [
 
 export function Navbar() {
   const mainLinks = links.map((link) => (
-    <UnstyledButton key={link.label} className={classes.mainLink}>
-      <div className={classes.mainLinkInner}>
-        <link.icon size={20} className={classes.mainLinkIcon} stroke={1.5} />
+    <UnstyledButton key={link.label} className={styles.mainLink}>
+      <div className={styles.mainLinkInner}>
+        <link.icon size={20} className={styles.mainLinkIcon} stroke={1.5} />
         <span>{link.label}</span>
       </div>
       {link.notifications && (
-        <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
+        <Badge size="sm" variant="filled" className={styles.mainLinkBadge}>
           {link.notifications}
         </Badge>
       )}
@@ -56,7 +56,7 @@ export function Navbar() {
       href="#"
       onClick={(event) => event.preventDefault()}
       key={collection.label}
-      className={classes.collectionLink}
+      className={styles.collectionLink}
     >
       <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
         {collection.emoji}
@@ -66,8 +66,8 @@ export function Navbar() {
   ))
 
   return (
-    <nav className={classes.navbar}>
-      <div className={classes.section}></div>
+    <nav className={styles.navbar}>
+      <div className={styles.section}></div>
 
       <TextInput
         placeholder="Search"
@@ -79,17 +79,17 @@ export function Navbar() {
           />
         }
         rightSectionWidth={70}
-        rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
+        rightSection={<Code className={styles.searchCode}>Ctrl + K</Code>}
         styles={{ section: { pointerEvents: 'none' } }}
         mb="sm"
       />
 
-      <div className={classes.section}>
-        <div className={classes.mainLinks}>{mainLinks}</div>
+      <div className={styles.section}>
+        <div className={styles.mainLinks}>{mainLinks}</div>
       </div>
 
-      <div className={classes.section}>
-        <Group className={classes.collectionsHeader} justify="space-between">
+      <div className={styles.section}>
+        <Group className={styles.collectionsHeader} justify="space-between">
           <Text size="xs" fw={500} c="dimmed">
             Collections
           </Text>
@@ -102,7 +102,7 @@ export function Navbar() {
             </ActionIcon>
           </Tooltip>
         </Group>
-        <div className={classes.collections}>{collectionLinks}</div>
+        <div className={styles.collections}>{collectionLinks}</div>
       </div>
     </nav>
   )
