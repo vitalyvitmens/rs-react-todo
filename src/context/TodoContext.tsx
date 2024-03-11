@@ -42,7 +42,7 @@ export const TodoContext = createContext<TodosContextType>({
 
 export const TodoProvider = ({ children }: IProviderProps) => {
   const [todo, setTodo] = useState<ITodos>(
-    () => JSON.parse(localStorage.getItem('todo') || '{}') || null
+    () => JSON.parse(localStorage.getItem('todo-rs-react-todo') || '{}') || null
   )
   const [todos, setTodos] = useState<ITodos[]>([])
   const [isTodoAdded, setIsTodoAdded] = useState(0)
@@ -68,7 +68,7 @@ export const TodoProvider = ({ children }: IProviderProps) => {
     } else {
       setIsSuccess(true)
       setIsError(true)
-      localStorage.setItem('todo', JSON.stringify(todo))
+      localStorage.setItem('todo-rs-react-todo', JSON.stringify(todo))
       setIsLoading(false)
       setTodo(todo)
     }

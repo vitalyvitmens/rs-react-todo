@@ -50,7 +50,7 @@ const Workspace = () => {
           </Input.Wrapper>
         </Box>
         <SimpleMdeReact value={value} onChange={onChange} />
-        <Button onClick={onSubmint} fullWidth variant="outlined" color="note">
+        <Button onClick={onSubmint} fullWidth variant="outlined" color="red">
           Save
         </Button>
       </Box>

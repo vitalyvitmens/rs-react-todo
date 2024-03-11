@@ -17,6 +17,8 @@ export const SearchBox = ({ setSearchTerm }: SearcBoxPropType) => {
       >
         <Input
           style={{ ml: 1, flex: 1 }}
+          id="search"
+          name="search"
           placeholder="Search todo"
           // inputProps={{ 'aria-label': 'search todo' }}
           onChange={(e) => setSearchTerm(e.target.value)}

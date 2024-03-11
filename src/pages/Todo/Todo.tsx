@@ -1,6 +1,6 @@
 import { Box, Button, Loader, Container, Modal, Text } from '@mantine/core'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
-import { useEffect, useState } from 'react'
+import { SetStateAction, useEffect, useState } from 'react'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
 import { Link, useNavigate } from 'react-router-dom'
@@ -54,11 +54,28 @@ export const Todo = () => {
     navigate(`/${todo?.id}`)
   }
 
-  const plainText = () => {
-    const rawMarkup = marked.parse(`${todo?.description}`)
-    return { __html: rawMarkup }
-  }
+  // \uD83D\uDC47️ добавить состояние для хранения HTML-текста
+  const [htmlText, setHtmlText] = useState<string | null>(null)
 
+  // \uD83D\uDC47️ использовать useEffect для преобразования текста в HTML
+  useEffect(() => {
+    // проверить, что текст существует
+    if (todo?.description) {
+      // вызвать функцию marked.parse и дождаться ее результата
+      const rawMarkup = marked.parse(todo.description) // сохранить результат в переменную
+      // добавить проверку типа для rawMarkup
+      if (rawMarkup instanceof Promise) {
+        // если rawMarkup является промисом, то дождаться его разрешения
+        rawMarkup.then((html: SetStateAction<string | null>) => {
+          // установить результат в состояние htmlText
+          setHtmlText(html)
+        })
+      } else {
+        // если rawMarkup является строкой, то просто установить его в состояние htmlText
+        setHtmlText(rawMarkup)
+      }
+    }
+  }, [todo?.description])
   return (
     <Container style={{ padding: '20px' }}>
       <Box
@@ -102,7 +119,8 @@ export const Todo = () => {
               <Text variant="h4">{todo?.title}</Text>
             </Box>
             <Box>
-              <p dangerouslySetInnerHTML={plainText()} />
+              {/* \uD83D\uDC47️ передать htmlText в свойство dangerouslySetInnerHTML */}
+              <p dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
             </Box>
           </Box>
         )}
