@@ -26,6 +26,5 @@ export interface IUsers {
 }
 
 const db = new MyAppDatabase()
-console.log(db)
 
 export default db
