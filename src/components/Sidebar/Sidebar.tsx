@@ -2,10 +2,10 @@ import { SearchBox } from '../SearchBox/SearchBox'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { ITodos } from '../../db'
 import { useEffect, useState } from 'react'
-// import { formatDateLocale } from '@mantine/dates'
 import { useNavigate } from 'react-router-dom'
 import { useDebounce } from '../../hooks/useDebounce'
-import { Container, Group, Text } from '@mantine/core'
+import { Container, Divider, Group, Text } from '@mantine/core'
+import { DatePickerInput } from '@mantine/dates'
 
 export const Sidebar = () => {
   const { selectTodo, getTodos, todos, isTodoAdded } = useSelectTodo()
@@ -48,10 +48,10 @@ export const Sidebar = () => {
 
   return (
     <Container
+      w="30%"
       // disableGutters
       style={{
-        borderRight: '2px solid #E9E9EA',
-        width: 'max-content',
+        borderRight: '2px solid #0000FF',
         padding: '0 0 0 0px',
       }}
     >
@@ -59,7 +59,6 @@ export const Sidebar = () => {
       <Group
         style={{
           padding: '10px',
-          height: '700px',
           overflow: 'scroll',
           overflowX: 'hidden',
         }}
@@ -72,31 +71,22 @@ export const Sidebar = () => {
               // alignItems="flex-start"
               onClick={() => onTodoSelect(todo.id)}
               key={todo.id}
-              style={{
-                borderBottom: '1px solid #E9E9EA',
-                borderRadius: '5px',
-                paddingLeft: '10px',
-                paddingRight: '10px',
-                cursor: 'pointer',
-                ':hover': {
-                  backgroundColor: '#E9E9EA',
-                },
-              }}
+              style={{ cursor: 'pointer' }}
             >
-              <Text w={700}>
-                {`${todo.title.slice(0, 21)}${
-                  todo.title.length > 15 ? '...' : ''
-                }`}
+              <Text w={700} fw={700}>
+                {todo.title}
               </Text>
+              <DatePickerInput radius={20} defaultValue={new Date(todo.date)} />
               <Text
                 size="sm"
                 w={600}
                 c="#050"
                 style={{ display: 'inline', marginRight: '8px' }}
               >
-                {todo.date}
+                {todo.date.slice(4, 24)}
               </Text>
-              <Text size="sm">{`${todo.description.slice(0, 14)}...`}</Text>{' '}
+              <Text size="sm">{todo.description}</Text>
+              <Divider w="100%" color="#000" />
             </Group>
           )
         })}

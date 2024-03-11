@@ -1,4 +1,5 @@
-import { Box, Input, Button, Paper } from '@mantine/core'
+import { Box, Input } from '@mantine/core'
+import { IconSearch } from '@tabler/icons-react'
 
 type SearcBoxPropType = {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
@@ -6,27 +7,21 @@ type SearcBoxPropType = {
 
 export const SearchBox = ({ setSearchTerm }: SearcBoxPropType) => {
   return (
-    <Box style={{ padding: '10px 10px', borderBottom: '1px solid #cdcdcd' }}>
-      <Paper
-        component="form"
-        style={{
-          p: '2px 4px',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <Input
-          style={{ ml: 1, flex: 1 }}
-          id="search"
-          name="search"
-          placeholder="Search todo"
-          // inputProps={{ 'aria-label': 'search todo' }}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Button type="button" style={{ p: '10px' }} aria-label="search">
-          {/* <Search /> */}
-        </Button>
-      </Paper>
+    <Box
+      style={{
+        display: 'flex',
+        padding: '10px 10px',
+        borderBottom: '1px solid #cdcdcd',
+      }}
+    >
+      <Input
+        radius={15}
+        id="search"
+        name="search"
+        placeholder="Search todo"
+        rightSection={<IconSearch size={16} />}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
     </Box>
   )
 }

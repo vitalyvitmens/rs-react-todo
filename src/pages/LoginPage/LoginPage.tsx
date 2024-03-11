@@ -1,4 +1,4 @@
-// import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { loginUser } from '../../manageAuth'
@@ -18,10 +18,6 @@ import {
 export const LoginPage = () => {
   const { user, logIn, isLoading, isSuccess, isError } = useAuth()
   const navigate = useNavigate()
-  console.log('####: user', user)
-  console.log('####: isLoading', isLoading)
-  console.log('####: isSuccess', isSuccess)
-  console.log('####: isError', isError)
   const form = useForm({
     initialValues: { username: '', password: '' },
     validate: {
@@ -31,11 +27,11 @@ export const LoginPage = () => {
     },
   })
 
-  // useEffect(() => {
-  //   if (user?.username !== undefined) {
-  //     navigate('/', { replace: true })
-  //   }
-  // }, [navigate, user])
+  useEffect(() => {
+    if (user?.username !== undefined) {
+      navigate('/', { replace: true })
+    }
+  }, [navigate, user])
 
   const handleSubmit = form.onSubmit((values) =>
     loginUser(values, () => {
@@ -43,10 +39,10 @@ export const LoginPage = () => {
     })
   )
 
-  if (isLoading) {
+  if (isLoading || isSuccess || isError) {
     return (
       <Center>
-        <Loader />
+        <Loader mt="50%" color="#0000FF" size={77} />
       </Center>
     )
   }

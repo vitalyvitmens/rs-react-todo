@@ -1,4 +1,12 @@
-import { Box, Button, Loader, Container, Modal, Text } from '@mantine/core'
+import {
+  Box,
+  Button,
+  Loader,
+  Container,
+  Modal,
+  Text,
+  TypographyStylesProvider,
+} from '@mantine/core'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
 import { SetStateAction, useEffect, useState } from 'react'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
@@ -118,10 +126,9 @@ export const Todo = () => {
             <Box mb={2}>
               <Text variant="h4">{todo?.title}</Text>
             </Box>
-            <Box>
-              {/* \uD83D\uDC47️ передать htmlText в свойство dangerouslySetInnerHTML */}
-              <p dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
-            </Box>
+            <TypographyStylesProvider>
+              <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
+            </TypographyStylesProvider>
           </Box>
         )}
       </Container>

@@ -40,6 +40,7 @@ export const updateTodo = async ({ id, title, description, date }: ITodos) => {
 export const deleteTodo = async (id: number) => {
   try {
     await db.todos.delete(id!)
+    console.log('Todo successfully removed!')
   } catch (error) {
     console.log('Failed to delete todo!', error)
   }
