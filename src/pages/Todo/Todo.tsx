@@ -1,3 +1,10 @@
+import { SetStateAction, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { IconTrash, IconEdit } from '@tabler/icons-react'
+import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { deleteTodo } from '../../manageData'
+import { ITodos } from '../../db'
+import { marked } from 'marked'
 import {
   Box,
   Button,
@@ -10,13 +17,6 @@ import {
   Center,
   Divider,
 } from '@mantine/core'
-import { IconTrash, IconEdit } from '@tabler/icons-react'
-import { SetStateAction, useEffect, useState } from 'react'
-import { useSelectTodo } from '../../hooks/useSelectTodo'
-import { deleteTodo } from '../../manageData'
-import { Link, useNavigate } from 'react-router-dom'
-import { ITodos } from '../../db'
-import { marked } from 'marked'
 
 export const Todo = () => {
   const [todo, setTodo] = useState<ITodos>()
@@ -27,12 +27,22 @@ export const Todo = () => {
     onTodoDelete,
     selectTodo,
   } = useSelectTodo()
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     setTodo(selectedTodo)
@@ -46,9 +56,7 @@ export const Todo = () => {
     handleClose()
   }
 
-  const onEditTodo = () => {
-    navigate(`/${todo?.id}`)
-  }
+  const onEditTodo = () => navigate(`/${todo?.id}`)
 
   const [htmlText, setHtmlText] = useState<string | null>(null)
 
@@ -74,7 +82,7 @@ export const Todo = () => {
         />
         <Link
           style={{
-            fontSize: '0.65rem',
+            fontSize: isMobile ? '0.5rem' : '0.75rem',
             fontWeight: '700',
             border: '2px solid #008000',
             padding: '2px 5px',

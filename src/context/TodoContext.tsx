@@ -46,15 +46,15 @@ export const TodoProvider = ({ children }: IProviderProps) => {
   )
   const [todos, setTodos] = useState<ITodos[]>([])
   const [isTodoAdded, setIsTodoAdded] = useState(0)
-  // Get single todo statuses
+
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
-  // Get all todos statuses
+
   const [isTodosLoading, setIsTodosLoading] = useState(false)
   const [isTodosSuccess, setIsTodosSuccess] = useState(false)
   const [isTodosError, setIsTodosError] = useState(false)
-  // Update todo statuses
+
   const [isTodoUpdating, setIsTodoUpdating] = useState(false)
   const [isTodoUpdated, setIsTodoUpdated] = useState(false)
   const [isTodoUpdateError, setIsTodoUpdateError] = useState(false)

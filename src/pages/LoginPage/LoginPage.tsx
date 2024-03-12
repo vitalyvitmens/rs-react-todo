@@ -29,7 +29,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user?.username !== undefined) {
-      navigate('/', { replace: true })
+      navigate('/')
     }
   }, [navigate, user])
 

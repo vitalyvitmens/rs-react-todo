@@ -1,28 +1,39 @@
-import { Center, Container } from '@mantine/core'
-// import { Navbar } from '../../components/Navbar/Navbar'
+import { Button, Center, Container } from '@mantine/core'
 import { Sidebar } from '../../components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 
 export const HomePage = () => {
+  const { logOut } = useAuth()
+  const handleLogout = () => logOut(() => {})
+
   return (
-    <Center>
-      <Container
-        m={16}
-        p={8}
-        w="100%"
-        bg="bisque"
-        style={{
-          display: 'flex',
-          border: '2px solid #0000FF',
-          borderRadius: '10px',
-          margin: '0 auto',
-          boxShadow: '0px 0px 14px 1px rgba(34, 60, 80, 0.21)',
-        }}
+    <Container>
+      <Button
+        m={8}
+        size="sm"
+        radius={15}
+        variant="outline"
+        onClick={handleLogout}
       >
-        {/* <Navbar /> */}
-        <Sidebar />
-        <Outlet />
-      </Container>
-    </Center>
+        Logout
+      </Button>
+      <Center>
+        <Container
+          p={8}
+          w="100%"
+          bg="bisque"
+          style={{
+            display: 'flex',
+            border: '2px solid #0000FF',
+            borderRadius: '10px',
+            boxShadow: '-5px -4px 10px black',
+          }}
+        >
+          <Sidebar />
+          <Outlet />
+        </Container>
+      </Center>
+    </Container>
   )
 }

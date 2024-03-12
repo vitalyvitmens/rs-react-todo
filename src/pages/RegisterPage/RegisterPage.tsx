@@ -11,11 +11,11 @@ import {
   Title,
   NavLink,
 } from '@mantine/core'
+import { useEffect } from 'react'
 
 export const RegisterPage = () => {
   const { user } = useAuth()
   const navigate = useNavigate()
-  console.log('####: user', user)
   const form = useForm({
     initialValues: {
       username: '',
@@ -31,6 +31,12 @@ export const RegisterPage = () => {
         value !== values.password ? 'Passwords did not match' : null,
     },
   })
+
+  useEffect(() => {
+    if (user?.username !== undefined) {
+      navigate('/')
+    }
+  }, [navigate, user])
 
   const handleSubmit = form.onSubmit(({ username, password }) =>
     registerUser({ username, password }, () => navigate('/login'))

@@ -46,6 +46,7 @@ export const AuthProvider = ({ children }: IProviderProps) => {
       callback()
     }
   }
+  
   const logOut = (callback: () => void) => {
     setUser(undefined)
     localStorage.removeItem('user-rs-react-todo')
