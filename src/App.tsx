@@ -11,7 +11,7 @@ import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 import { TodoProvider } from './context/TodoContext'
 
-function App() {
+export const App = () => {
   return (
     <AuthProvider>
       <TodoProvider>
@@ -41,5 +41,3 @@ function App() {
     </AuthProvider>
   )
 }
-
-export default App
