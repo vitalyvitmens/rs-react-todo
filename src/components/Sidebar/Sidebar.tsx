@@ -4,7 +4,7 @@ import { ITodos } from '../../db'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDebounce } from '../../hooks/useDebounce'
-import { Container, Divider, Group, Text } from '@mantine/core'
+import { Box, Container, Divider, Flex, Group, Text } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
 
 export const Sidebar = () => {
@@ -47,47 +47,36 @@ export const Sidebar = () => {
   }, [debouncedSearchTerm])
 
   return (
-    <Container
-      w="30%"
-      // disableGutters
-      style={{
-        borderRight: '2px solid #0000FF',
-        padding: '0 0 0 0px',
-      }}
-    >
+    <Container fluid w="30%">
       <SearchBox setSearchTerm={setSearchTerm} />
-      <Group
-        style={{
-          padding: '10px',
-          overflow: 'scroll',
-          overflowX: 'hidden',
-        }}
-      >
+      <Group>
         {filteredTodos.map((todo) => {
           return (
-            <Group
-              role="listitem"
-              // disableGutters
-              // alignItems="flex-start"
-              onClick={() => onTodoSelect(todo.id)}
-              key={todo.id}
-              style={{ cursor: 'pointer' }}
-            >
-              <Text w={700} fw={700}>
-                {todo.title}
-              </Text>
-              <DatePickerInput radius={20} defaultValue={new Date(todo.date)} />
-              <Text
-                size="sm"
-                w={600}
-                c="#050"
-                style={{ display: 'inline', marginRight: '8px' }}
+              <Group w="100%"
+                role="listitem"
+                // disableGutters
+                onClick={() => onTodoSelect(todo.id)}
+                key={todo.id}
+                style={{ cursor: 'pointer' }}
               >
-                {todo.date.slice(4, 24)}
-              </Text>
-              <Text size="sm">{todo.description}</Text>
-              <Divider w="100%" color="#000" />
-            </Group>
+                <Text w={700} fw={700}>
+                  {todo.title}
+                </Text>
+                <DatePickerInput
+                  radius={20}
+                  defaultValue={new Date(todo.date)}
+                />
+                <Text
+                  size="sm"
+                  w={600}
+                  c="#050"
+                  style={{ display: 'inline', marginRight: '8px' }}
+                >
+                  {todo.date.slice(4, 24)}
+                </Text>
+                <Text size="sm">{todo.description}</Text>
+                <Divider w="100%" color="#000" />
+              </Group>
           )
         })}
       </Group>

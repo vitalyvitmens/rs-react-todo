@@ -19,6 +19,7 @@
     "@mantinex/mantine-logo": "^1.0.1",
     "@tabler/icons-react": "^3.0.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
+    "dayjs": "^1.11.10",
     "dexie": "^3.2.6",
     "dexie-react-hooks": "^1.1.7",
     "easymde": "^2.18.0",
