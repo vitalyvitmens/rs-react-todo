@@ -29,9 +29,9 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user?.username !== undefined) {
-      navigate('/')
+      navigate('/', { replace: true })
     }
-  }, [navigate, user])
+  }, [user, navigate])
 
   const handleSubmit = form.onSubmit((values) =>
     loginUser(values, () => {

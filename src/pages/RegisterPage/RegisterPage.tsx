@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
 import { registerUser } from '../../manageAuth'
 import { useForm } from '@mantine/form'
 import {
@@ -11,10 +10,8 @@ import {
   Title,
   NavLink,
 } from '@mantine/core'
-import { useEffect } from 'react'
 
 export const RegisterPage = () => {
-  const { user } = useAuth()
   const navigate = useNavigate()
   const form = useForm({
     initialValues: {
@@ -31,12 +28,6 @@ export const RegisterPage = () => {
         value !== values.password ? 'Passwords did not match' : null,
     },
   })
-
-  useEffect(() => {
-    if (user?.username !== undefined) {
-      navigate('/')
-    }
-  }, [navigate, user])
 
   const handleSubmit = form.onSubmit(({ username, password }) =>
     registerUser({ username, password }, () => navigate('/login'))
