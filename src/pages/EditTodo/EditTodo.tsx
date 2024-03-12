@@ -1,8 +1,8 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
-import { Box, Container, Input, Text } from '@mantine/core'
-import { useParams } from 'react-router-dom'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { Box, Button, Center, Input, Text } from '@mantine/core'
 
 export const EditTodo = () => {
   const { todoId } = useParams()
@@ -15,11 +15,7 @@ export const EditTodo = () => {
   } = useSelectTodo()
   const [title, setTitle] = useState<string>(fetchedTodo?.title)
   const [value, setValue] = useState<string>(fetchedTodo?.description)
-
-  useEffect(() => {
-    selectTodo(Number(todoId))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const navigate = useNavigate()
 
   useEffect(() => {
     selectTodo(Number(todoId))
@@ -51,30 +47,35 @@ export const EditTodo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, title])
 
+  const handleToMainPage = () => navigate('/')
+
   return (
-    <Box>
-      <Box
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          height: '150px',
-        }}
-      >
-        <Text mb={2} variant="h5" style={{ textAlign: 'center' }}>
-          Новая заметка2
+    <Box p={10}>
+      <Center>
+        <Text size="md" fw={700}>
+          Редактирование заметки
         </Text>
-        <Input.Wrapper label="Заголовок3">
-          <Input
-            required
-            id="todo-title"
-            name="title"
-            value={title}
-            onChange={onTitleChange}
-          />
-        </Input.Wrapper>
-      </Box>
-      <SimpleMdeReact id="todo-textarea" value={value} onChange={onChange} />
+      </Center>
+      <Input.Wrapper label="Заголовок">
+        <Input
+          required
+          id="todo-title"
+          name="title"
+          value={title}
+          onChange={onTitleChange}
+        />
+      </Input.Wrapper>
+      <SimpleMdeReact
+        style={{ fontSize: '0.8rem' }}
+        id="todo-textarea"
+        value={value}
+        onChange={onChange}
+      />
+      <Center>
+        <Button onClick={handleToMainPage} fullWidth color="#008000" radius={5}>
+          To Home Page
+        </Button>
+      </Center>
     </Box>
   )
 }

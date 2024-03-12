@@ -6,6 +6,9 @@ import {
   Modal,
   Text,
   TypographyStylesProvider,
+  Group,
+  Center,
+  Divider,
 } from '@mantine/core'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
 import { SetStateAction, useEffect, useState } from 'react'
@@ -25,13 +28,12 @@ export const Todo = () => {
     selectTodo,
   } = useSelectTodo()
 
-  // Modal
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  //-------------------------------
 
   const navigate = useNavigate()
+
   useEffect(() => {
     setTodo(selectedTodo)
   }, [selectedTodo])
@@ -39,9 +41,7 @@ export const Todo = () => {
   const onDeleteTodo = () => {
     deleteTodo(selectedTodo.id!)
     onTodoDelete()
-    // Новый код
     selectTodo(todos.length - 1)
-    // navigate('/')
     setTodo(todos[todos.length - 1])
     handleClose()
   }
@@ -66,80 +66,73 @@ export const Todo = () => {
   }, [todo?.description])
 
   return (
-    <Container>
-      <Box
-        h={50}
-        mb={2}
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Box onClick={handleOpen}>
-          <IconTrash style={{ color: '#F3B900', cursor: 'pointer' }} />
-        </Box>
-        <Box>
-          <Link
-            style={{
-              border: '1px solid #F3B900',
-              padding: '5px 10px',
-              borderRadius: '5px',
-              color: '#F3B900',
-            }}
-            to="/new"
-          >
-            Добавить заметку
-          </Link>
-        </Box>
-        <Box>
-          <IconEdit
-            onClick={onEditTodo}
-            style={{ color: '#F3B900', cursor: 'pointer' }}
-          />
-        </Box>
-      </Box>
-      <Container>
+    <Container w="100%" pt={6}>
+      <Group justify="space-around" mb={10}>
+        <IconTrash
+          style={{ color: '#FF0000', cursor: 'pointer' }}
+          onClick={handleOpen}
+        />
+        <Link
+          style={{
+            fontSize: '0.65rem',
+            fontWeight: '700',
+            border: '2px solid #008000',
+            padding: '2px 5px',
+            borderRadius: '5px',
+            color: '#008000',
+          }}
+          to="/new"
+        >
+          Добавить заметку
+        </Link>
+        <IconEdit
+          style={{ color: '#0000FF', cursor: 'pointer' }}
+          onClick={onEditTodo}
+        />
+        <Divider size={2} w="100%" color="#0000FF" />
+      </Group>
+      <Center>
         {isLoading ? (
           <Loader />
         ) : (
           <Box>
-            <Box mb={2}>
-              <Text variant="h4">{todo?.title}</Text>
-            </Box>
+            <Text size="md" fw={700} pl={10} pb={10}>
+              {todo?.title}
+            </Text>
+            <Text size="xs" pb={10} c="#008000">
+              {todo?.date.slice(4, 24)}
+            </Text>
             <TypographyStylesProvider>
               <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
             </TypographyStylesProvider>
           </Box>
         )}
-      </Container>
+      </Center>
       <Modal
         opened={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
-        <Box>
-          <Text id="modal-modal-title" variant="h6" component="h2">
+        <Container>
+          <Text id="modal-title" size="xl" fw={700} c="#0000FF">
             Удалить заметку?
           </Text>
-          <Text id="modal-modal-description" style={{ mt: 2 }}>
-            Подтвердить удаление заметки?
+          <Text id="modal-description" size="md" fw={700} ta="center">
+            {todo?.title}
           </Text>
-          <Box mt={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-              onClick={handleClose}
-              style={{ marginRight: '10px' }}
-              variant="contained"
-              color="success"
-            >
+          <Group
+            mt={16}
+            style={{ display: 'flex', justifyContent: 'flex-end' }}
+          >
+            <Button onClick={handleClose} radius={15} color="#008000">
               Отмена
             </Button>
-            <Button onClick={onDeleteTodo} variant="outlined" color="error">
+            <Button onClick={onDeleteTodo} radius={15} color="#FF0000">
               Удалить
             </Button>
-          </Box>
-        </Box>
+          </Group>
+        </Container>
       </Modal>
     </Container>
   )
