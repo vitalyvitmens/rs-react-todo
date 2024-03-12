@@ -10,14 +10,14 @@ export const Sidebar = () => {
   const { selectTodo, getTodos, todos, isTodoAdded } = useSelectTodo()
   const [fetchedTodos, setFetchedTodos] = useState(todos)
   const [filteredTodos, setFilteredTodos] = useState(todos)
-  const [searchTerm, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState('')
   const navigate = useNavigate()
   const onTodoSelect = (id: ITodos['id']) => {
     selectTodo(id)
     navigate('/')
   }
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500)
+  const debouncedSearchInput = useDebounce(searchInput, 500)
 
   useEffect(() => {
     setFetchedTodos(todos)
@@ -31,11 +31,11 @@ export const Sidebar = () => {
   }, [isTodoAdded])
 
   useEffect(() => {
-    if (debouncedSearchTerm.length) {
+    if (debouncedSearchInput.length) {
       setFilteredTodos(
         fetchedTodos.filter(
           (i) =>
-            i.description.toLocaleLowerCase().indexOf(debouncedSearchTerm) !==
+            i.description.toLocaleLowerCase().indexOf(debouncedSearchInput) !==
             -1
         )
       )
@@ -43,10 +43,10 @@ export const Sidebar = () => {
       setFilteredTodos(fetchedTodos)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchTerm])
+  }, [debouncedSearchInput])
 
   return (
-    <Box w="35%">
+    <Box w="38%" style={{ borderRight: '2px solid #0000FF' }}>
       <SearchInput setSearchInput={setSearchInput} />
       {filteredTodos.map((todo) => {
         return (
@@ -57,7 +57,7 @@ export const Sidebar = () => {
             key={todo.id}
             style={{ cursor: 'pointer' }}
           >
-            <Text size="md" fw={700} truncate="end">
+            <Text size="md" fw={700} pl={10} truncate="end">
               {todo.title}
             </Text>
             <Text size="xs" w={600} c="#008000">
@@ -66,7 +66,7 @@ export const Sidebar = () => {
             <Text size="sm" truncate="end">
               {todo.description}
             </Text>
-            <Divider w="100%" pb={5} color="#000" />
+            <Divider w="97%" pb={5} color="#000" />
           </Group>
         )
       })}

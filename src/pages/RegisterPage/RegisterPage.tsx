@@ -43,6 +43,7 @@ export const RegisterPage = () => {
       </Title>
       <form onSubmit={handleSubmit}>
         <TextInput
+          id="register-username"
           radius={5}
           c="#FFC94C"
           label="Username"
@@ -50,6 +51,7 @@ export const RegisterPage = () => {
           {...form.getInputProps('username')}
         />
         <PasswordInput
+          id="register-password"
           radius={5}
           c="#FFC94C"
           label="Password"
@@ -57,6 +59,7 @@ export const RegisterPage = () => {
           {...form.getInputProps('password')}
         />
         <PasswordInput
+          id="register-confirm-password"
           radius={5}
           c="#FFC94C"
           label="Confirm password"

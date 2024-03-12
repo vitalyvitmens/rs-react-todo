@@ -70,6 +70,7 @@ export function Navbar() {
       <div className={styles.section}></div>
 
       <TextInput
+        id="navbar"
         placeholder="Search"
         size="xs"
         leftSection={

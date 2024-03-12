@@ -1,4 +1,4 @@
-import Workspace from "../../components/Workspace/Workspace"
+import { Workspace } from "../../components/Workspace/Workspace"
 
 export const NewTodo = () => {
   return (

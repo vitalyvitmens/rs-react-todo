@@ -52,31 +52,29 @@ export const EditTodo = () => {
   }, [value, title])
 
   return (
-    <Container style={{ overflow: 'hidden' }}>
-      <Box style={{ padding: '0 10px 20px 10px' }}>
-        <Box
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            height: '150px',
-          }}
-        >
-          <Text mb={2} variant="h5" style={{ textAlign: 'center' }}>
-            Новая заметка
-          </Text>
-          <Input.Wrapper label="Заголовок">
-            <Input
-              required
-              id="outlined-required"
-              name="title"
-              value={title}
-              onChange={onTitleChange}
-            />
-          </Input.Wrapper>
-        </Box>
-        <SimpleMdeReact value={value} onChange={onChange} />
+    <Box>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '150px',
+        }}
+      >
+        <Text mb={2} variant="h5" style={{ textAlign: 'center' }}>
+          Новая заметка2
+        </Text>
+        <Input.Wrapper label="Заголовок3">
+          <Input
+            required
+            id="todo-title"
+            name="title"
+            value={title}
+            onChange={onTitleChange}
+          />
+        </Input.Wrapper>
       </Box>
-    </Container>
+      <SimpleMdeReact id="todo-textarea" value={value} onChange={onChange} />
+    </Box>
   )
 }

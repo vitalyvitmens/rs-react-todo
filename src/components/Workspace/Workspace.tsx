@@ -1,14 +1,16 @@
-import { Box, Button, Container, Input, Text } from '@mantine/core'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
-import 'easymde/dist/easymde.min.css'
-import { createTodo } from '../../manageData'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { createTodo } from '../../manageData'
+import { Box, Button, Center, Input, Text } from '@mantine/core'
+import 'easymde/dist/easymde.min.css'
 
-const Workspace = () => {
-  const [title, setTitle] = useState('Новая заметка')
+export const Workspace = () => {
+  const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
   const { onTodoAdd } = useSelectTodo()
+  const navigate = useNavigate()
 
   useEffect(() => {}, [])
 
@@ -23,39 +25,37 @@ const Workspace = () => {
   const onSubmint = () => {
     createTodo({ title, description: value, date: new Date().toString() })
     onTodoAdd()
+    navigate('/')
   }
 
   return (
-    <Container style={{ overflow: 'hidden' }}>
-      <Box style={{ padding: '0 10px 20px 10px' }}>
-        <Box
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            height: '150px',
-          }}
-        >
-          <Text mb={2} variant="h5" style={{ textAlign: 'center' }}>
-            Новая заметка
-          </Text>
-          <Input.Wrapper label="Заголовок">
-            <Input
-              required
-              id="outlined-required"
-              name="title"
-              value={title}
-              onChange={onTitleChange}
-            />
-          </Input.Wrapper>
-        </Box>
-        <SimpleMdeReact value={value} onChange={onChange} />
-        <Button onClick={onSubmint} fullWidth variant="outlined" color="red">
+    <Box p={10}>
+      <Center>
+        <Text size="md" fw={700}>
+          Новая заметка
+        </Text>
+      </Center>
+      <Input.Wrapper label="Заголовок">
+        <Input
+          required
+          id="new-todo-title"
+          name="todoTitle"
+          placeholder="Новая заметка"
+          value={title}
+          onChange={onTitleChange}
+        />
+      </Input.Wrapper>
+      <SimpleMdeReact
+        style={{ fontSize: '0.8rem' }}
+        id="new-todo-textarea"
+        value={value}
+        onChange={onChange}
+      />
+      <Center>
+        <Button onClick={onSubmint} fullWidth color="#008000" radius={5}>
           Save
         </Button>
-      </Box>
-    </Container>
+      </Center>
+    </Box>
   )
 }
-
-export default Workspace

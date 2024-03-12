@@ -54,6 +54,7 @@ export const LoginPage = () => {
       </Title>
       <form onSubmit={handleSubmit}>
         <TextInput
+          id="login-username"
           radius={5}
           c="#FFC94C"
           label="Username"
@@ -61,6 +62,7 @@ export const LoginPage = () => {
           {...form.getInputProps('username')}
         />
         <PasswordInput
+          id="login-password"
           radius={5}
           c="#FFC94C"
           label="Password"

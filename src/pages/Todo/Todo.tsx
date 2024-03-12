@@ -50,30 +50,23 @@ export const Todo = () => {
     navigate(`/${todo?.id}`)
   }
 
-  // \uD83D\uDC47️ добавить состояние для хранения HTML-текста
   const [htmlText, setHtmlText] = useState<string | null>(null)
 
-  // \uD83D\uDC47️ использовать useEffect для преобразования текста в HTML
   useEffect(() => {
-    // проверить, что текст существует
     if (todo?.description) {
-      // вызвать функцию marked.parse и дождаться ее результата
-      const rawMarkup = marked.parse(todo.description) // сохранить результат в переменную
-      // добавить проверку типа для rawMarkup
+      const rawMarkup = marked.parse(todo.description)
       if (rawMarkup instanceof Promise) {
-        // если rawMarkup является промисом, то дождаться его разрешения
         rawMarkup.then((html: SetStateAction<string | null>) => {
-          // установить результат в состояние htmlText
           setHtmlText(html)
         })
       } else {
-        // если rawMarkup является строкой, то просто установить его в состояние htmlText
         setHtmlText(rawMarkup)
       }
     }
   }, [todo?.description])
+
   return (
-    <Container style={{ padding: '20px' }}>
+    <Container>
       <Box
         h={50}
         mb={2}

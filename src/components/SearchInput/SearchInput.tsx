@@ -7,7 +7,7 @@ type SearchInputType = {
 
 export const SearchInput = ({ setSearchInput }: SearchInputType) => {
   return (
-    <Box m="0 0 10px 0">
+    <Box m="0 8px 10px 0">
       <Input
         radius={15}
         id="search"
