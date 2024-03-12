@@ -1,17 +1,16 @@
-import { SearchBox } from '../SearchBox/SearchBox'
+import { SearchInput } from '../SearchInput/SearchInput'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { ITodos } from '../../db'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDebounce } from '../../hooks/useDebounce'
-import { Box, Container, Divider, Flex, Group, Text } from '@mantine/core'
-import { DatePickerInput } from '@mantine/dates'
+import { Box, Divider, Group, Text } from '@mantine/core'
 
 export const Sidebar = () => {
   const { selectTodo, getTodos, todos, isTodoAdded } = useSelectTodo()
   const [fetchedTodos, setFetchedTodos] = useState(todos)
   const [filteredTodos, setFilteredTodos] = useState(todos)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchInput] = useState('')
   const navigate = useNavigate()
   const onTodoSelect = (id: ITodos['id']) => {
     selectTodo(id)
@@ -47,39 +46,30 @@ export const Sidebar = () => {
   }, [debouncedSearchTerm])
 
   return (
-    <Container fluid w="30%">
-      <SearchBox setSearchTerm={setSearchTerm} />
-      <Group>
-        {filteredTodos.map((todo) => {
-          return (
-              <Group w="100%"
-                role="listitem"
-                // disableGutters
-                onClick={() => onTodoSelect(todo.id)}
-                key={todo.id}
-                style={{ cursor: 'pointer' }}
-              >
-                <Text w={700} fw={700}>
-                  {todo.title}
-                </Text>
-                <DatePickerInput
-                  radius={20}
-                  defaultValue={new Date(todo.date)}
-                />
-                <Text
-                  size="sm"
-                  w={600}
-                  c="#050"
-                  style={{ display: 'inline', marginRight: '8px' }}
-                >
-                  {todo.date.slice(4, 24)}
-                </Text>
-                <Text size="sm">{todo.description}</Text>
-                <Divider w="100%" color="#000" />
-              </Group>
-          )
-        })}
-      </Group>
-    </Container>
+    <Box w="35%">
+      <SearchInput setSearchInput={setSearchInput} />
+      {filteredTodos.map((todo) => {
+        return (
+          <Group
+            role="listitem"
+            w="100%"
+            onClick={() => onTodoSelect(todo.id)}
+            key={todo.id}
+            style={{ cursor: 'pointer' }}
+          >
+            <Text size="md" fw={700} truncate="end">
+              {todo.title}
+            </Text>
+            <Text size="xs" w={600} c="#008000">
+              {todo.date.slice(4, 24)}
+            </Text>
+            <Text size="sm" truncate="end">
+              {todo.description}
+            </Text>
+            <Divider w="100%" pb={5} color="#000" />
+          </Group>
+        )
+      })}
+    </Box>
   )
 }

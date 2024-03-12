@@ -8,6 +8,7 @@ export const HomePage = () => {
     <Center>
       <Container
         m={16}
+        p={8}
         w="100%"
         bg="bisque"
         style={{

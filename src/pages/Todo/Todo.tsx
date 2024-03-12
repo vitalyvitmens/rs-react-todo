@@ -15,18 +15,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ITodos } from '../../db'
 import { marked } from 'marked'
 
-const styleTodo = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-}
-
 export const Todo = () => {
   const [todo, setTodo] = useState<ITodos>()
   const {
@@ -138,7 +126,7 @@ export const Todo = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box style={{ styleTodo }}>
+        <Box>
           <Text id="modal-modal-title" variant="h6" component="h2">
             Удалить заметку?
           </Text>
