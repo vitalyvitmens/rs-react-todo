@@ -94,10 +94,10 @@ export const Todo = () => {
           Добавить заметку
         </Link>
         <IconEdit
-          style={{ color: '#0000FF', cursor: 'pointer' }}
+          style={{ color: '#FFC94C', cursor: 'pointer' }}
           onClick={onEditTodo}
         />
-        <Divider size={2} w="100%" color="#0000FF" />
+        <Divider size={2} w="100%" color="#FFC94C" />
       </Group>
       <Center>
         {isLoading ? (

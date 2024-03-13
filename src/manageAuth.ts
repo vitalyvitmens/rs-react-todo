@@ -1,7 +1,7 @@
 import db, { IUsers } from './db'
 import { compare } from './utils/compare'
-import { ErrorNotification } from './components/MantineNotifications/ErrorNotification/ErrorNotification'
-import { DefaultNotification } from './components/MantineNotifications/DefaultNotification/DefaultNotification'
+import { ErrorNotification } from './components/MantineNotifications/components/ErrorNotification/ErrorNotification'
+import { DefaultNotification } from './components/MantineNotifications/components/DefaultNotification/DefaultNotification'
 
 export const registerUser = async (
   { username, password }: IUsers,

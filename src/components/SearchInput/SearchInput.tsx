@@ -16,7 +16,7 @@ export const SearchInput = ({ setSearchInput }: SearchInputType) => {
         rightSection={<IconSearch size={24} />}
         onChange={(e) => setSearchInput(e.target.value)}
       />
-      <Divider size={2} w="100%" mt={10} color="#0000FF" />
+      <Divider size={2} w="100%" mt={10} color="#FFC94C" />
     </Box>
   )
 }

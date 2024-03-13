@@ -46,7 +46,7 @@ export const Sidebar = () => {
   }, [debouncedSearchInput])
 
   return (
-    <Box w="38%" style={{ borderRight: '2px solid #0000FF' }}>
+    <Box w="38%" style={{ borderRight: '2px solid #FFC94C' }}>
       <SearchInput setSearchInput={setSearchInput} />
       {filteredTodos.map((todo) => {
         return (

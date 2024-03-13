@@ -25,7 +25,7 @@ export const HomePage = () => {
           bg="bisque"
           style={{
             display: 'flex',
-            border: '2px solid #0000FF',
+            border: '2px solid #FFC94C',
             borderRadius: '10px',
             boxShadow: '-5px -4px 10px black',
           }}

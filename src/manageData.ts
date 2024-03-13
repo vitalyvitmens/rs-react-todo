@@ -1,11 +1,19 @@
 import db, { ITodos } from './db'
+import { DefaultNotification } from './components/MantineNotifications/components/DefaultNotification/DefaultNotification'
+import { ErrorNotification } from './components/MantineNotifications/components/ErrorNotification/ErrorNotification'
 
 export const createTodo = async ({ title, description, date }: ITodos) => {
   try {
     await db.todos.add({ title, description, date })
-    console.log('Todo successfully created!')
+    DefaultNotification({
+      title: 'Success',
+      message: `Todo: ${title} успешно создана`,
+    })
   } catch (error) {
-    console.log('Failed to create todo!', error)
+    ErrorNotification({
+      title: 'Error',
+      message: `Не удалось создать todo: ${error}`,
+    })
   }
 }
 
@@ -14,7 +22,10 @@ export const readTodo = async (todoId: ITodos['id']) => {
     const todo = await db.todos.get({ id: todoId })
     return todo
   } catch (error) {
-    console.log('Failed to read todo!', error)
+    ErrorNotification({
+      title: 'Error',
+      message: `Не удалось получить todo: ${error}`,
+    })
   }
 }
 
@@ -23,7 +34,10 @@ export const readTodos = async () => {
     const todo = await db.todos.toArray()
     return todo
   } catch (error) {
-    console.log('Failed to read todos!', error)
+    ErrorNotification({
+      title: 'Error',
+      message: `Не удалось получить todos: ${error}`,
+    })
     return []
   }
 }
@@ -31,17 +45,29 @@ export const readTodos = async () => {
 export const updateTodo = async ({ id, title, description, date }: ITodos) => {
   try {
     await db.todos.update(id!, { title, description, date })
-    console.log('Todo updated successfully!')
+    DefaultNotification({
+      title: 'Success',
+      message: `Todo: ${title} успешно обновлена`,
+    })
   } catch (error) {
-    console.log('Failed to update todo!', error)
+    ErrorNotification({
+      title: 'Error',
+      message: `Не удалось обновить todo: ${error}`,
+    })
   }
 }
 
 export const deleteTodo = async (id: number) => {
   try {
     await db.todos.delete(id!)
-    console.log('Todo successfully removed!')
+    DefaultNotification({
+      title: 'Success',
+      message: `Todo c id: ${id!} успешно удалена`,
+    })
   } catch (error) {
-    console.log('Failed to delete todo!', error)
+    ErrorNotification({
+      title: 'Error',
+      message: `Не удалось удалить todo: ${error}`,
+    })
   }
 }
