@@ -31,18 +31,22 @@ export const EditTodo = () => {
   }, [])
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      onTodoUpdate({
-        id: Number(todoId),
-        title,
-        description: value,
-        date: new Date().toString(),
-      })
-      onTodoAdd()
-    }, 1000)
+    if (todoId === undefined || isNaN(Number(todoId))) {
+      navigate('*')
+    } else {
+      const id = setTimeout(() => {
+        onTodoUpdate({
+          id: Number(todoId),
+          title,
+          description: value,
+          date: new Date().toString(),
+        })
+        onTodoAdd()
+      }, 1000)
 
-    return () => {
-      clearTimeout(id)
+      return () => {
+        clearTimeout(id)
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, title])

@@ -27,8 +27,8 @@ export const App = () => {
             >
               <Route path="/">
                 <Route index element={<Todo />} />
-                <Route path=":todoId" element={<EditTodo />} />
-                <Route path="new" element={<NewTodo />} />
+                <Route path="/:todoId" element={<EditTodo />} />
+                <Route path="/new" element={<NewTodo />} />
               </Route>
             </Route>
             <Route path="/login" element={<LoginPage />} />
