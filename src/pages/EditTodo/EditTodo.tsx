@@ -42,7 +42,7 @@ export const EditTodo = () => {
           date: new Date().toString(),
         })
         onTodoAdd()
-      }, 1000)
+      }, 2000)
 
       return () => {
         clearTimeout(id)
