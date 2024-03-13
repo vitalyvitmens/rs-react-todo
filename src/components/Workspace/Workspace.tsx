@@ -5,6 +5,7 @@ import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { createTodo } from '../../manageData'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
 import 'easymde/dist/easymde.min.css'
+import { ErrorNotification } from '../MantineNotifications/components/ErrorNotification/ErrorNotification'
 
 export const Workspace = () => {
   const [title, setTitle] = useState('')
@@ -23,9 +24,18 @@ export const Workspace = () => {
   }, [])
 
   const onSubmint = () => {
-    createTodo({ title, description: value, date: new Date().toString() })
-    onTodoAdd()
-    navigate('/')
+    if (!title) {
+      ErrorNotification({
+        title: 'Error',
+        message: `Нет данных для создания Todo, заполните хотя бы заголовок`,
+      })
+
+      return
+    } else {
+      createTodo({ title, description: value, date: new Date().toString() })
+      onTodoAdd()
+      navigate('/')
+    }
   }
 
   return (
