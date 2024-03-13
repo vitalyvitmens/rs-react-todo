@@ -14,13 +14,13 @@ export const routes: RouteObject[] = [
     element: <HomePage />,
     children: [
       { path: '/', element: <HomePage /> },
-      { path: '/', element: <Todo /> },
+      { index: true, element: <Todo /> },
       { path: '/:todoId', element: <EditTodo /> },
       { path: '/new', element: <NewTodo /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
   { path: '/login', element: <LoginPage /> },
   { path: '/register', element: <RegisterPage /> },
-  { path: '*', element: <NotFoundPage /> },
   { path: '/offline', element: <Offline /> },
 ]
