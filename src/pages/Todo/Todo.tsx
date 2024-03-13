@@ -51,7 +51,7 @@ export const Todo = () => {
   const onDeleteTodo = () => {
     deleteTodo(selectedTodo.id!)
     onTodoDelete()
-    selectTodo(todos.length - 1)
+    selectTodo(todos.length)
     setTodo(todos[0])
     handleClose()
   }
