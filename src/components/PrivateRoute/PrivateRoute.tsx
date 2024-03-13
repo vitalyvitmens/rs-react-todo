@@ -1,17 +1,36 @@
-import { Navigate, useLocation } from 'react-router-dom'
+import { Suspense } from 'react'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { Center, Loader } from '@mantine/core'
+import { RouteObject } from 'react-router-dom'
 
-type PrivateRoute = {
-  children: JSX.Element
+interface PrivateRouteProps {
+  route: RouteObject
 }
 
-export const PrivateRoute = ({ children }: PrivateRoute) => {
+export const PrivateRoute = ({ route }: PrivateRouteProps) => {
   const { user } = useAuth()
   const location = useLocation()
 
-  if (user?.username === undefined) {
+  if (!user?.username) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />
   }
 
-  return <>{children}</>
+  return (
+    <Suspense
+      fallback={
+        <Center>
+          <Loader mt="50%" color="#0000FF" size={77} />
+        </Center>
+      }
+    >
+      <Routes>
+        <Route>
+          {route.children?.map((child, index) => (
+            <Route key={index} path={child.path} element={child.element} />
+          ))}
+        </Route>
+      </Routes>
+    </Suspense>
+  )
 }
