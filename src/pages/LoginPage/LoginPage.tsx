@@ -16,7 +16,7 @@ import {
 } from '@mantine/core'
 
 export const LoginPage = () => {
-  const { user, logIn, isLoading, isSuccess, isError } = useAuth()
+  const { user, logIn, isLoading, isError } = useAuth()
   const navigate = useNavigate()
   const form = useForm({
     initialValues: { username: '', password: '' },
@@ -39,7 +39,7 @@ export const LoginPage = () => {
     })
   )
 
-  if (isLoading || isSuccess || isError) {
+  if (isLoading || isError) {
     return (
       <Center>
         <Loader mt="50%" color="#0000FF" size={77} />

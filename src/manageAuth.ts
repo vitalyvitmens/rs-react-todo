@@ -1,5 +1,7 @@
 import db, { IUsers } from './db'
 import { compare } from './utils/compare'
+import { ErrorNotification } from './components/MantineNotifications/ErrorNotification/ErrorNotification'
+import { DefaultNotification } from './components/MantineNotifications/DefaultNotification/DefaultNotification'
 
 export const registerUser = async (
   { username, password }: IUsers,
@@ -8,10 +10,19 @@ export const registerUser = async (
   try {
     const newUser = await db.users.get({ username })
     if (newUser) {
-      throw new Error(`User ${username} already existed!`)
+      ErrorNotification({
+        title: 'Error',
+        message: `Пользователь ${username} уже существует. Выберите другой username, если это Вы пожалуйста залогиньтесь`,
+      })
+      return
     }
+
     await db.users.add({ username, password })
-    console.log(`User ${username} registered successfully!`)
+    DefaultNotification({
+      title: 'Success',
+      message: `Пользователь ${username} успешно зарегистрировался`,
+    })
+
     callback()
   } catch (error) {
     alert(error)
@@ -23,22 +34,42 @@ export const loginUser = async (
   callback: () => void
 ) => {
   try {
-    const user = await db.users
-      .where('[username+password]')
-      .equals([username, password])
-      .first()
+    const user = await db.users.where('username').equals(username).first()
     if (!user) {
-      throw new Error(`User ${username} not found!`)
+      ErrorNotification({
+        title: 'Error',
+        message: `Пользователь ${username} не найден`,
+      })
+      return
     }
     const isPasswordMatch = compare(password, user.password)
     if (!isPasswordMatch) {
-      throw new Error('Wrong password!')
+      ErrorNotification({
+        title: 'Error',
+        message: 'Неверный пароль',
+      })
+      return
     }
+
     await db.users.update(user, { loggedIn: true })
-    console.log(`User ${username} logged in successfully!`)
+    DefaultNotification({
+      title: 'Success',
+      message: `Пользователь ${username} успешно вошел в систему`,
+    })
+
     callback()
   } catch (error) {
-    alert(error)
+    if (error instanceof Error) {
+      ErrorNotification({
+        title: 'Error',
+        message: error.message,
+      })
+    } else {
+      ErrorNotification({
+        title: 'Error',
+        message: 'Произошла неизвестная ошибка',
+      })
+    }
   }
 }
 

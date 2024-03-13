@@ -1,0 +1,17 @@
+.root {
+  background-color: rgb(215, 250, 180);
+  border: 3px solid #FF0000;
+  border-radius: 10px;
+  box-shadow: -3px -2px 8px black;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #FF0000;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 1rem;
+}
