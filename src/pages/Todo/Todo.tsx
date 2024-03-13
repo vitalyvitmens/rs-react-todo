@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
@@ -20,6 +20,7 @@ import {
 
 export const Todo = () => {
   const [todo, setTodo] = useState<ITodos>()
+  console.log('####: todo', todo)
   const {
     todo: selectedTodo,
     todos,
@@ -27,22 +28,15 @@ export const Todo = () => {
     onTodoDelete,
     selectTodo,
   } = useSelectTodo()
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
+  const isMobile = useMemo(
+    () => window.matchMedia('(max-width: 768px)').matches,
+    []
+  )
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   useEffect(() => {
     setTodo(selectedTodo)
@@ -56,22 +50,19 @@ export const Todo = () => {
     handleClose()
   }
 
-  const onEditTodo = () => navigate(`/${todo?.id}`)
-
   const [htmlText, setHtmlText] = useState<string | null>(null)
 
   useEffect(() => {
-    if (todo?.description) {
-      const rawMarkup = marked.parse(todo.description)
-      if (rawMarkup instanceof Promise) {
-        rawMarkup.then((html: SetStateAction<string | null>) => {
-          setHtmlText(html)
-        })
-      } else {
+    const updateHtmlText = async () => {
+      if (todo?.description) {
+        const rawMarkup = await marked.parse(todo.description)
         setHtmlText(rawMarkup)
       }
     }
+    updateHtmlText()
   }, [todo?.description])
+
+  const onEditTodo = () => navigate(`/${todo?.id}`)
 
   return (
     <Container w="100%" pt={6}>
@@ -97,11 +88,13 @@ export const Todo = () => {
           style={{ color: '#FFC94C', cursor: 'pointer' }}
           onClick={onEditTodo}
         />
-        <Divider size={2} w="100%" color="#0000FF" />
+        <Divider size={2} w="100%" color="#FFC94C" />
       </Group>
       <Center>
-        {isLoading ? (
-          <Loader />
+        {isLoading || !todo ? (
+          <Center>
+            <Loader mt="50%" color="#0000FF" size={77} />
+          </Center>
         ) : (
           <Box>
             <Text size="md" fw={700} pl={10} pb={10}>
