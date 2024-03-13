@@ -14,7 +14,7 @@ export const routes: RouteObject[] = [
     element: <HomePage />,
     children: [
       { path: '/', element: <HomePage /> },
-      { path: '/', index: true, element: <Todo /> },
+      { path: '/', element: <Todo /> },
       { path: '/:todoId', element: <EditTodo /> },
       { path: '/new', element: <NewTodo /> },
     ],

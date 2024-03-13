@@ -26,8 +26,12 @@ export const PrivateRoute = ({ route }: PrivateRouteProps) => {
     >
       <Routes>
         <Route>
-          {route.children?.map((child, index) => (
-            <Route key={index} path={child.path} element={child.element} />
+          {route.children?.map((child) => (
+            <Route
+              key={route.element?.toString()}
+              path={child.path}
+              element={child.element}
+            />
           ))}
         </Route>
       </Routes>

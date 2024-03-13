@@ -11,14 +11,17 @@ export const App = () => {
       <TodoProvider>
         <BrowserRouter>
           <Routes>
-            {routes?.map((route, index) => (
+            {routes?.map((route) => (
               <Route
-                key={index}
+                key={route.element?.toString()}
                 path={route?.path}
                 element={
                   <ErrorBoundary>
                     {route?.children ? (
-                      <PrivateRoute route={route} key={index} />
+                      <PrivateRoute
+                        route={route}
+                        key={route.element?.toString()}
+                      />
                     ) : (
                       route.element
                     )}
