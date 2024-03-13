@@ -97,7 +97,7 @@ export const Todo = () => {
           style={{ color: '#FFC94C', cursor: 'pointer' }}
           onClick={onEditTodo}
         />
-        <Divider size={2} w="100%" color="#FFC94C" />
+        <Divider size={2} w="100%" color="#0000FF" />
       </Group>
       <Center>
         {isLoading ? (
@@ -108,7 +108,7 @@ export const Todo = () => {
               {todo?.title}
             </Text>
             <Text size="xs" pb={10} c="#008000">
-              {todo?.date.slice(4, 24)}
+              {todo?.date?.slice(4, 24)}
             </Text>
             <TypographyStylesProvider>
               <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
