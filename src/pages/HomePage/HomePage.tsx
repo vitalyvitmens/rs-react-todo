@@ -1,11 +1,19 @@
-import { Button, Center, Container } from '@mantine/core'
+import { Button, Center, Container, Loader } from '@mantine/core'
 import { Sidebar } from '../../components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 
 export const HomePage = () => {
-  const { logOut } = useAuth()
+  const { logOut, isLoading, isError } = useAuth()
   const handleLogout = () => logOut(() => {})
+
+  if (isLoading || isError) {
+    return (
+      <Center>
+        <Loader mt="50%" color="#0000FF" size={77} />
+      </Center>
+    )
+  }
 
   return (
     <Container>

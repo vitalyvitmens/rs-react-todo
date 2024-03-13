@@ -2,12 +2,14 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
-import { Box, Button, Center, Input, Text } from '@mantine/core'
+import { Box, Button, Center, Input, Loader, Text } from '@mantine/core'
 import 'easymde/dist/easymde.min.css'
 import { ErrorNotification } from '../MantineNotifications/components/ErrorNotification/ErrorNotification'
 
 export const Workspace = () => {
+  const { isLoading, isError } = useAuth()
   const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
   const { onTodoAdd } = useSelectTodo()
@@ -36,6 +38,14 @@ export const Workspace = () => {
       onTodoAdd()
       navigate('/')
     }
+  }
+
+  if (isLoading || isError) {
+    return (
+      <Center>
+        <Loader mt="50%" color="#0000FF" size={77} />
+      </Center>
+    )
   }
 
   return (

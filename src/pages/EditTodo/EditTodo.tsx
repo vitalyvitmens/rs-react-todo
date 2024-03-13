@@ -2,9 +2,11 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
-import { Box, Button, Center, Input, Text } from '@mantine/core'
+import { useAuth } from '../../hooks/useAuth'
+import { Box, Button, Center, Input, Loader, Text } from '@mantine/core'
 
 export const EditTodo = () => {
+  const { isLoading, isError } = useAuth()
   const { todoId } = useParams()
   const {
     selectTodo,
@@ -52,6 +54,14 @@ export const EditTodo = () => {
   }, [value, title])
 
   const handleToMainPage = () => navigate('/')
+
+  if (isLoading || isError) {
+    return (
+      <Center>
+        <Loader mt="50%" color="#0000FF" size={77} />
+      </Center>
+    )
+  }
 
   return (
     <Box p={10}>
