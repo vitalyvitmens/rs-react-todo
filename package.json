@@ -22,6 +22,7 @@
     "dexie": "^3.2.6",
     "dexie-react-hooks": "^1.1.7",
     "easymde": "^2.18.0",
+    "firebase": "^10.8.1",
     "marked": "^12.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

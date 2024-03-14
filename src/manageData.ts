@@ -1,3 +1,5 @@
+import { get, query, ref } from 'firebase/database'
+import { firebaseDb } from './firebase'
 import db, { ITodos } from './db'
 import { DefaultNotification } from './components/Mantine/DefaultNotification/DefaultNotification'
 import { ErrorNotification } from './components/Mantine/ErrorNotification/ErrorNotification'
@@ -19,8 +21,10 @@ export const createTodo = async ({ title, description, date }: ITodos) => {
 
 export const readTodo = async (todoId: ITodos['id']) => {
   try {
+    const todosDbRef = ref(firebaseDb, 'todos')
     const todo = await db.todos.get({ id: todoId })
-    return todo
+    
+    return get(query(todosDbRef)), todo
   } catch (error) {
     ErrorNotification({
       title: 'Error',
