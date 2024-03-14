@@ -5,10 +5,10 @@ import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
 import { ITodos } from '../../db'
 import { marked } from 'marked'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
   Box,
   Button,
-  Loader,
   Container,
   Modal,
   Text,
@@ -64,11 +64,7 @@ export const Todo = () => {
   const onEditTodo = () => navigate(`/${todo?.id}`)
 
   if (isLoading || !todo) {
-    return (
-      <Center>
-        <Loader mt="50%" color="#0000FF" size={77} />
-      </Center>
-    )
+    return <Stylizloader />
   }
 
   return (

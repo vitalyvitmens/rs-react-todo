@@ -4,9 +4,10 @@ import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
-import { Box, Button, Center, Input, Loader, Text } from '@mantine/core'
 import 'easymde/dist/easymde.min.css'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
+import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
+import { Box, Button, Center, Input, Text } from '@mantine/core'
 
 export const Workspace = () => {
   const { isLoading, isError } = useAuth()
@@ -41,11 +42,7 @@ export const Workspace = () => {
   }
 
   if (isLoading || isError) {
-    return (
-      <Center>
-        <Loader mt="50%" color="#0000FF" size={77} />
-      </Center>
-    )
+    return <Stylizloader />
   }
 
   return (

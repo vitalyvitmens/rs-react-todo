@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
+import { RouteObject } from 'react-router-dom'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { Center, Loader } from '@mantine/core'
-import { RouteObject } from 'react-router-dom'
+import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
 
 interface PrivateRouteProps {
   route: RouteObject
@@ -17,13 +17,7 @@ export const PrivateRoute = ({ route }: PrivateRouteProps) => {
   }
 
   return (
-    <Suspense
-      fallback={
-        <Center>
-          <Loader mt="50%" color="#0000FF" size={77} />
-        </Center>
-      }
-    >
+    <Suspense fallback={<Stylizloader />}>
       <Routes>
         <Route element={route.element}>
           {route.children?.map((child) => (

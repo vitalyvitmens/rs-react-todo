@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../manageAuth'
 import { useAuth } from '../../hooks/useAuth'
 import { useForm } from '@mantine/form'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
   PasswordInput,
   Group,
@@ -11,8 +12,6 @@ import {
   Box,
   Title,
   NavLink,
-  Center,
-  Loader,
 } from '@mantine/core'
 
 export const RegisterPage = () => {
@@ -47,11 +46,7 @@ export const RegisterPage = () => {
   )
 
   if (isLoading || isError) {
-    return (
-      <Center>
-        <Loader mt="50%" color="#0000FF" size={77} />
-      </Center>
-    )
+    return <Stylizloader />
   }
 
   return (
