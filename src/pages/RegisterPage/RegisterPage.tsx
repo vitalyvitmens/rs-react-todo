@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../manageAuth'
 import { useAuth } from '../../hooks/useAuth'
@@ -10,10 +11,12 @@ import {
   Box,
   Title,
   NavLink,
+  Center,
+  Loader,
 } from '@mantine/core'
 
 export const RegisterPage = () => {
-  const { logIn } = useAuth()
+  const { user, logIn, isLoading, isError } = useAuth()
   const navigate = useNavigate()
   const form = useForm({
     initialValues: {
@@ -31,11 +34,25 @@ export const RegisterPage = () => {
     },
   })
 
+  useEffect(() => {
+    if (user?.username !== undefined) {
+      navigate('/', { replace: true })
+    }
+  }, [user, navigate])
+
   const handleSubmit = form.onSubmit(({ username, password }) =>
     registerUser({ username, password }, () => {
       logIn({ username, password }, () => navigate('/', { replace: true }))
     })
   )
+
+  if (isLoading || isError) {
+    return (
+      <Center>
+        <Loader mt="50%" color="#0000FF" size={77} />
+      </Center>
+    )
+  }
 
   return (
     <Box maw={340} mx="auto" mt={100}>
