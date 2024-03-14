@@ -68,7 +68,6 @@ export const TodoProvider = ({ children }: IProviderProps) => {
     } else {
       setIsSuccess(true)
       setIsError(true)
-      localStorage.setItem('todo-rs-react-todo', JSON.stringify(todo))
       setIsLoading(false)
       setTodo(todo)
     }

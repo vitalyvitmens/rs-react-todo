@@ -1,5 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
-import { ErrorNotification } from '../MantineNotifications/components/ErrorNotification/ErrorNotification'
+import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
+import { Center, Text } from '@mantine/core'
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -39,17 +40,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          style={{
-            display: 'flex',
-            margin: 'auto',
-            color: 'red',
-            fontSize: '3rem',
-            fontWeight: 'bold',
-          }}
-        >
-          Что-то пошло не так!
-        </div>
+        <Center pt="25%" ml={30} mr={10}>
+          <Text size="5rem" fw={800} c="#FF0000">
+            Что-то пошло не так!
+          </Text>
+        </Center>
       )
     }
 

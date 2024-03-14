@@ -1,5 +1,6 @@
 import { Suspense, ComponentType, ReactNode } from 'react'
 import { NoProps } from '../../types'
+import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
 
 interface ComponentProps {
   component: ComponentType<NoProps>
@@ -9,7 +10,7 @@ interface ComponentProps {
 
 export function ComponentWithSuspense({
   component: Component,
-  fallback = 'Загрузка...',
+  fallback = <Stylizloader />,
   ...otherProps
 }: ComponentProps) {
   return (

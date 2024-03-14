@@ -1,11 +1,17 @@
-import { Button, Center, Container } from '@mantine/core'
-import { Sidebar } from '../../components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { ComponentWithSuspense } from '../../components/ComponentWithSuspense/ComponentWithSuspense'
+import { Sidebar } from '../../components/Sidebar/Sidebar'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
+import { Button, Center, Container } from '@mantine/core'
 
 export const HomePage = () => {
-  const { logOut } = useAuth()
+  const { logOut, isLoading, isError } = useAuth()
   const handleLogout = () => logOut(() => {})
+
+  if (isLoading || isError) {
+    return <Stylizloader />
+  }
 
   return (
     <Container>
@@ -30,8 +36,8 @@ export const HomePage = () => {
             boxShadow: '-5px -4px 10px black',
           }}
         >
-          <Sidebar />
-          <Outlet />
+          <ComponentWithSuspense component={Sidebar} />
+          <ComponentWithSuspense component={Outlet} />
         </Container>
       </Center>
     </Container>

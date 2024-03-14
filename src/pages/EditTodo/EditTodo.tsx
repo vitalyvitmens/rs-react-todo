@@ -2,9 +2,12 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { useAuth } from '../../hooks/useAuth'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
 
 export const EditTodo = () => {
+  const { isLoading, isError } = useAuth()
   const { todoId } = useParams()
   const {
     selectTodo,
@@ -52,6 +55,10 @@ export const EditTodo = () => {
   }, [value, title])
 
   const handleToMainPage = () => navigate('/')
+
+  if (isLoading || isError) {
+    return <Stylizloader />
+  }
 
   return (
     <Box p={10}>

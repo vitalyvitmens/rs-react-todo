@@ -5,10 +5,10 @@ import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
 import { ITodos } from '../../db'
 import { marked } from 'marked'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
   Box,
   Button,
-  Loader,
   Container,
   Modal,
   Text,
@@ -20,7 +20,6 @@ import {
 
 export const Todo = () => {
   const [todo, setTodo] = useState<ITodos>()
-  console.log('####: todo', todo)
   const {
     todo: selectedTodo,
     todos,
@@ -46,7 +45,7 @@ export const Todo = () => {
     deleteTodo(selectedTodo.id!)
     onTodoDelete()
     selectTodo(todos.length)
-    setTodo(todos[0])
+    setTodo(todos[todos.length - 2])
     handleClose()
   }
 
@@ -63,6 +62,10 @@ export const Todo = () => {
   }, [todo?.description])
 
   const onEditTodo = () => navigate(`/${todo?.id}`)
+
+  if (isLoading || !todo) {
+    return <Stylizloader />
+  }
 
   return (
     <Container w="100%" pt={6}>
@@ -91,23 +94,17 @@ export const Todo = () => {
         <Divider size={2} w="100%" color="#FFC94C" />
       </Group>
       <Center>
-        {isLoading || !todo ? (
-          <Center>
-            <Loader mt="50%" color="#0000FF" size={77} />
-          </Center>
-        ) : (
-          <Box>
-            <Text size="md" fw={700} pl={10} pb={10}>
-              {todo?.title}
-            </Text>
-            <Text size="xs" pb={10} c="#008000">
-              {todo?.date?.slice(4, 24)}
-            </Text>
-            <TypographyStylesProvider>
-              <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
-            </TypographyStylesProvider>
-          </Box>
-        )}
+        <Box>
+          <Text size="md" fw={700} pl={10} pb={10}>
+            {todo?.title}
+          </Text>
+          <Text size="xs" pb={10} c="#008000">
+            {todo?.date?.slice(4, 24)}
+          </Text>
+          <TypographyStylesProvider>
+            <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
+          </TypographyStylesProvider>
+        </Box>
       </Center>
       <Modal
         opened={open}

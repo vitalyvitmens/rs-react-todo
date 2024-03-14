@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useState } from 'react'
 import { IUsers } from '../db'
 import { getUser } from '../manageAuth'
-import { DefaultNotification } from '../components/MantineNotifications/components/DefaultNotification/DefaultNotification'
+import { DefaultNotification } from '../components/Mantine/DefaultNotification/DefaultNotification'
 
 interface AuthContextType {
   user: IUsers | undefined

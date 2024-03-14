@@ -1,6 +1,6 @@
 import db, { ITodos } from './db'
-import { DefaultNotification } from './components/MantineNotifications/components/DefaultNotification/DefaultNotification'
-import { ErrorNotification } from './components/MantineNotifications/components/ErrorNotification/ErrorNotification'
+import { DefaultNotification } from './components/Mantine/DefaultNotification/DefaultNotification'
+import { ErrorNotification } from './components/Mantine/ErrorNotification/ErrorNotification'
 
 export const createTodo = async ({ title, description, date }: ITodos) => {
   try {

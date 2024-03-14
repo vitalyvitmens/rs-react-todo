@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../manageAuth'
 import { useAuth } from '../../hooks/useAuth'
 import { useForm } from '@mantine/form'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
   PasswordInput,
   Group,
@@ -13,7 +15,7 @@ import {
 } from '@mantine/core'
 
 export const RegisterPage = () => {
-  const { logIn } = useAuth()
+  const { user, logIn, isLoading, isError } = useAuth()
   const navigate = useNavigate()
   const form = useForm({
     initialValues: {
@@ -31,11 +33,21 @@ export const RegisterPage = () => {
     },
   })
 
+  useEffect(() => {
+    if (user?.username !== undefined) {
+      navigate('/', { replace: true })
+    }
+  }, [user, navigate])
+
   const handleSubmit = form.onSubmit(({ username, password }) =>
     registerUser({ username, password }, () => {
       logIn({ username, password }, () => navigate('/', { replace: true }))
     })
   )
+
+  if (isLoading || isError) {
+    return <Stylizloader />
+  }
 
   return (
     <Box maw={340} mx="auto" mt={100}>
