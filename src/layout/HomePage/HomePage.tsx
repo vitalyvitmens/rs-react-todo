@@ -2,6 +2,7 @@ import { Button, Center, Container, Loader } from '@mantine/core'
 import { Sidebar } from '../../components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { Suspense } from 'react'
 
 export const HomePage = () => {
   const { logOut, isLoading, isError } = useAuth()
@@ -39,7 +40,9 @@ export const HomePage = () => {
           }}
         >
           <Sidebar />
-          <Outlet />
+          <Suspense fallback={<h1>Loading...</h1>}>
+        <Outlet />
+      </Suspense>
         </Container>
       </Center>
     </Container>
