@@ -40,9 +40,15 @@ export const HomePage = () => {
           }}
         >
           <Sidebar />
-          <Suspense fallback={<h1>Loading...</h1>}>
-        <Outlet />
-      </Suspense>
+          <Suspense
+            fallback={
+              <Center>
+                <Loader mt="50%" color="#0000FF" size={77} />
+              </Center>
+            }
+          >
+            <Outlet />
+          </Suspense>
         </Container>
       </Center>
     </Container>

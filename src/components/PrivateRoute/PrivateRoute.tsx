@@ -12,12 +12,18 @@ export const PrivateRoute = ({ route }: PrivateRouteProps) => {
   const { user } = useAuth()
   const location = useLocation()
 
-  if (user === null) {
+  if (user?.username === undefined) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />
   }
 
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense
+      fallback={
+        <Center>
+          <Loader mt="50%" color="#0000FF" size={77} />
+        </Center>
+      }
+    >
       <Routes>
         <Route element={route.element}>
           {route.children?.map((child) => (

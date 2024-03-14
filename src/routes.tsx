@@ -7,7 +7,6 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage.lazy'
 import Offline from './pages/Offline/Offline.lazy'
 import RegisterPage from './pages/RegisterPage/RegisterPage.lazy'
 import Todo from './pages/Todo/Todo.lazy'
-import { Sidebar } from './components/Sidebar/Sidebar'
 
 export const routes: RouteObject[] = [
   {
@@ -17,9 +16,9 @@ export const routes: RouteObject[] = [
       { path: '/', element: <Todo /> },
       { path: '/:todoId', element: <EditTodo /> },
       { path: '/new', element: <NewTodo /> },
-      { path: '*', element: <NotFoundPage /> },
     ],
   },
+  { path: '*', element: <NotFoundPage /> },
   { path: '/login', element: <LoginPage /> },
   { path: '/register', element: <RegisterPage /> },
   { path: '/offline', element: <Offline /> },
