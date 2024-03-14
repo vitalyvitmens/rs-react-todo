@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
 import { Box, Button, Center, Input, Loader, Text } from '@mantine/core'
 import 'easymde/dist/easymde.min.css'
-import { ErrorNotification } from '../MantineNotifications/components/ErrorNotification/ErrorNotification'
+import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 
 export const Workspace = () => {
   const { isLoading, isError } = useAuth()

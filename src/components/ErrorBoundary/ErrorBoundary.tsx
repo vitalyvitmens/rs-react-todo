@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
-import { ErrorNotification } from '../MantineNotifications/components/ErrorNotification/ErrorNotification'
+import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Center, Text } from '@mantine/core'
 
 interface ErrorBoundaryState {
