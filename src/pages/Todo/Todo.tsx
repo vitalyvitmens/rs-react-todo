@@ -20,7 +20,6 @@ import {
 
 export const Todo = () => {
   const [todo, setTodo] = useState<ITodos>()
-  console.log('####: todo', todo)
   const {
     todo: selectedTodo,
     todos,
@@ -46,7 +45,7 @@ export const Todo = () => {
     deleteTodo(selectedTodo.id!)
     onTodoDelete()
     selectTodo(todos.length)
-    setTodo(todos[0])
+    setTodo(todos[todos.length - 2])
     handleClose()
   }
 
