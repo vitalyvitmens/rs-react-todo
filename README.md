@@ -1,36 +1,19 @@
 # React + TypeScript + Vite
 
-- генератор манифеста и иконок нужных размеров: https://app-manifest.firebaseapp.com/
-
 - npm install dexie
 - npm install dexie-react-hooks
 - добавить файл db.ts в корень проекта https://dexie.org/docs/Tutorial/React
+- npm i
+- npm run dev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- генератор манифеста и иконок нужных размеров: https://app-manifest.firebaseapp.com/
 
-Currently, two official plugins are available:
+### Проект представляет собой веб-приложение для управления задачами (to-do list), созданное с использованием TypeScript и React. Это приложение позволяет пользователям добавлять, просматривать, редактировать и удалять задачи, тем самым помогая организовать их повседневные дела.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### В качестве основы для пользовательского интерфейса используется библиотека компонентов Mantine, которая предоставляет готовые к использованию компоненты с возможностью кастомизации. Для управления состоянием приложения применяется контекстное API React (React Context API), что позволяет избежать пропс-дрелинга (props drilling) и обеспечивает более чистую и понятную архитектуру.
 
-## Expanding the ESLint configuration
+### Для аутентификации и управления данными пользователя используются контексты AuthContext и TodoContext, которые инкапсулируют логику и состояние, связанное с пользователями и задачами соответственно. В проекте также реализована система уведомлений для информирования пользователя о различных событиях, таких как успешный вход в систему или удаление задачи.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Код приложения организован с соблюдением принципов чистого кода и модульности, что облегчает его поддержку и масштабирование. Весь проект размещён на GitHub, что позволяет отслеживать изменения, управлять задачами и сотрудничать с другими разработчиками.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Это приложение является отличным примером современного одностраничного приложения (SPA), демонстрирующего возможности React и TypeScript в создании интерактивных и динамичных веб-приложений. Если у вас есть дополнительные вопросы или нужна помощь, я всегда готов помочь!
