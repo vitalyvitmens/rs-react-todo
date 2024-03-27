@@ -1,6 +1,6 @@
 import { SearchInput } from '../SearchInput/SearchInput'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
-import { ITodos } from '../../db'
+import { ITodo } from '../../db'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -13,7 +13,7 @@ export const Sidebar = () => {
   const [filteredTodos, setFilteredTodos] = useState(todos)
   const [searchInput, setSearchInput] = useState('')
   const navigate = useNavigate()
-  const onTodoSelect = (id: ITodos['id']) => {
+  const onTodoSelect = (id: ITodo['id']) => {
     selectTodo(id)
     navigate('/')
   }

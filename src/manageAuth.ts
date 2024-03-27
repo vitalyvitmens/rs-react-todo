@@ -1,4 +1,4 @@
-import db, { IUsers } from './db'
+import db, { IUser } from './db'
 import { compare } from './utils/compare'
 import { ErrorNotification } from './components/Mantine/ErrorNotification/ErrorNotification'
 import { DefaultNotification } from './components/Mantine/DefaultNotification/DefaultNotification'
@@ -7,7 +7,7 @@ import { successMessages } from './constants/successMessages'
 import { errorMessages } from './constants/errorMessages'
 
 export const registerUser = async (
-  { username, password }: IUsers,
+  { username, password }: IUser,
   callback: () => void
 ) => {
   try {
@@ -33,7 +33,7 @@ export const registerUser = async (
 }
 
 export const loginUser = async (
-  { username, password }: IUsers,
+  { username, password }: IUser,
   callback: () => void
 ) => {
   try {
@@ -76,7 +76,7 @@ export const loginUser = async (
   }
 }
 
-export const getUser = async (user: IUsers) => {
+export const getUser = async (user: IUser) => {
   try {
     const data = await db.users.get(user)
     return data

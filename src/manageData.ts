@@ -1,11 +1,11 @@
-import db, { ITodos } from './db'
+import db, { ITodo } from './db'
 import { DefaultNotification } from './components/Mantine/DefaultNotification/DefaultNotification'
 import { ErrorNotification } from './components/Mantine/ErrorNotification/ErrorNotification'
 import { notificationTitles } from './constants/notificationTitles'
 import { successMessages } from './constants/successMessages'
 import { errorMessages } from './constants/errorMessages'
 
-export const createTodo = async ({ title, description, date }: ITodos) => {
+export const createTodo = async ({ title, description, date }: ITodo) => {
   try {
     await db.todos.add({ title, description, date })
     DefaultNotification({
@@ -20,7 +20,7 @@ export const createTodo = async ({ title, description, date }: ITodos) => {
   }
 }
 
-export const readTodo = async (todoId: ITodos['id']) => {
+export const readTodo = async (todoId: ITodo['id']) => {
   try {
     const todo = await db.todos.get({ id: todoId })
     return todo
@@ -45,7 +45,7 @@ export const readTodos = async () => {
   }
 }
 
-export const updateTodo = async ({ id, title, description, date }: ITodos) => {
+export const updateTodo = async ({ id, title, description, date }: ITodo) => {
   try {
     await db.todos.update(id!, { title, description, date })
     DefaultNotification({

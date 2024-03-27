@@ -4,7 +4,7 @@ import { RoutePaths } from '../../routes/RoutePaths'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
-import { ITodos } from '../../db'
+import { ITodo } from '../../db'
 import { marked } from 'marked'
 import { Colors } from '../../constants/colors'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
@@ -21,7 +21,7 @@ import {
 } from '@mantine/core'
 
 export const Todo = () => {
-  const [todo, setTodo] = useState<ITodos>()
+  const [todo, setTodo] = useState<ITodo>()
   const {
     todo: selectedTodo,
     todos,

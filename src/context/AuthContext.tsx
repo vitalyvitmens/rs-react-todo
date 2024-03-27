@@ -1,16 +1,16 @@
 import { ReactNode, createContext, useState } from 'react'
-import { IUsers } from '../db'
+import { IUser } from '../db'
 import { getUser } from '../manageAuth'
 import { DefaultNotification } from '../components/Mantine/DefaultNotification/DefaultNotification'
 import { notificationTitles } from '../constants/notificationTitles'
 import { successMessages } from '../constants/successMessages'
 
 interface AuthContextType {
-  user: IUsers | undefined
+  user: IUser | undefined
   isLoading: boolean
   isSuccess: boolean
   isError: boolean
-  logIn: (newUser: IUsers, callback: () => void) => void
+  logIn: (newUser: IUser, callback: () => void) => void
   logOut: (callback: () => void) => void
 }
 
@@ -28,14 +28,14 @@ export interface IProviderProps {
 }
 
 export const AuthProvider = ({ children }: IProviderProps) => {
-  const [user, setUser] = useState<IUsers | undefined>(
+  const [user, setUser] = useState<IUser | undefined>(
     () => JSON.parse(localStorage.getItem('user-rs-react-todo') || '{}') || null
   )
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 
-  const logIn = async (newUser: IUsers, callback: () => void) => {
+  const logIn = async (newUser: IUser, callback: () => void) => {
     setIsLoading(true)
     const user = await getUser(newUser)
     if (typeof user === 'undefined') {
