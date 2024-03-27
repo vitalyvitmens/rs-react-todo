@@ -14,6 +14,11 @@ import {
   Title,
   NavLink,
 } from '@mantine/core'
+import {
+  validateConfirmPassword,
+  validatePassword,
+  validateUsername,
+} from '../../utils/validation'
 
 export const RegisterPage = () => {
   const { user, logIn, isLoading, isError } = useAuth()
@@ -25,12 +30,10 @@ export const RegisterPage = () => {
       confirmPassword: '',
     },
     validate: {
-      username: (value) =>
-        value.length < 2 ? 'Username must have at least 2 letters' : null,
-      password: (value) =>
-        value.length < 6 ? 'Password must have at least 6 letters' : null,
+      username: validateUsername,
+      password: validatePassword,
       confirmPassword: (value, values) =>
-        value !== values.password ? 'Passwords did not match' : null,
+        validateConfirmPassword(value, values),
     },
   })
 
