@@ -8,7 +8,6 @@ import { successMessages } from '../constants/successMessages'
 interface AuthContextType {
   user: IUser | undefined
   isLoading: boolean
-  isSuccess: boolean
   isError: boolean
   logIn: (newUser: IUser, callback: () => void) => void
   logOut: (callback: () => void) => void
@@ -17,7 +16,6 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   user: undefined,
   isLoading: false,
-  isSuccess: false,
   isError: false,
   logIn() {},
   logOut() {},
@@ -32,7 +30,6 @@ export const AuthProvider = ({ children }: IProviderProps) => {
     () => JSON.parse(localStorage.getItem('user-rs-react-todo') || '{}') || null
   )
   const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 
   const logIn = async (newUser: IUser, callback: () => void) => {
@@ -42,7 +39,6 @@ export const AuthProvider = ({ children }: IProviderProps) => {
       setIsLoading(false)
       setIsError(true)
     } else {
-      setIsSuccess(true)
       localStorage.setItem('user-rs-react-todo', JSON.stringify(user))
       setIsLoading(false)
       setUser(user)
@@ -64,7 +60,6 @@ export const AuthProvider = ({ children }: IProviderProps) => {
   const value = {
     user,
     isLoading,
-    isSuccess,
     isError,
     logIn,
     logOut,

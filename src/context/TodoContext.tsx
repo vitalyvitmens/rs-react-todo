@@ -9,7 +9,6 @@ interface TodosContextType {
   todos: ITodo[]
   isTodoAdded: number
   isLoading: boolean
-  isSuccess: boolean
   isError: boolean
   isTodoUpdating: boolean
   isTodoUpdated: boolean
@@ -30,7 +29,6 @@ export const TodoContext = createContext<TodosContextType>({
   todos: [],
   isTodoAdded: 0,
   isLoading: false,
-  isSuccess: false,
   isError: false,
   isTodoUpdating: false,
   isTodoUpdated: false,
@@ -49,7 +47,6 @@ export const TodoProvider = ({ children }: IProviderProps) => {
   const [isTodoAdded, setIsTodoAdded] = useState(0)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 
   const [isTodosLoading, setIsTodosLoading] = useState(false)
@@ -67,7 +64,6 @@ export const TodoProvider = ({ children }: IProviderProps) => {
       setIsLoading(false)
       setIsError(true)
     } else {
-      setIsSuccess(true)
       setIsError(true)
       setIsLoading(false)
       setTodo(todo)
@@ -119,7 +115,6 @@ export const TodoProvider = ({ children }: IProviderProps) => {
     onTodoDelete,
     todos,
     isLoading,
-    isSuccess,
     isError,
     isTodosLoading,
     isTodosSuccess,
