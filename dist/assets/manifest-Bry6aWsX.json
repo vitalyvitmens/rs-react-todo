@@ -6,9 +6,9 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
-  "id": "/",
-  "start_url": "/",
+  "scope": "/rs-react-todo/",
+  "id": "/rs-react-todo/",
+  "start_url": "/rs-react-todo/",
   "display_override": ["window-controls-overlay"],
   "screenshots": [
     {
