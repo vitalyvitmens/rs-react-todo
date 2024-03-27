@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 import { TodoProvider } from './context/TodoContext'
@@ -9,7 +9,7 @@ export const App = () => {
   return (
     <AuthProvider>
       <TodoProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             {routes.map((route) => (
               <Route
@@ -30,7 +30,7 @@ export const App = () => {
               />
             ))}
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </TodoProvider>
     </AuthProvider>
   )
