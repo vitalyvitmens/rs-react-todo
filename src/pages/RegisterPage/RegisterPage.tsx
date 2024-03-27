@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../manageAuth'
 import { useAuth } from '../../hooks/useAuth'
 import { Colors } from '../../constants/colors'
+import {
+  validateConfirmPassword,
+  validateRegisterPassword,
+  validateUsername,
+} from '../../utils/validation'
 import { useForm } from '@mantine/form'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
@@ -14,11 +19,6 @@ import {
   Title,
   NavLink,
 } from '@mantine/core'
-import {
-  validateConfirmPassword,
-  validatePassword,
-  validateUsername,
-} from '../../utils/validation'
 
 export const RegisterPage = () => {
   const { user, logIn, isLoading, isError } = useAuth()
@@ -31,7 +31,7 @@ export const RegisterPage = () => {
     },
     validate: {
       username: validateUsername,
-      password: validatePassword,
+      password: validateRegisterPassword,
       confirmPassword: (value, values) =>
         validateConfirmPassword(value, values),
     },

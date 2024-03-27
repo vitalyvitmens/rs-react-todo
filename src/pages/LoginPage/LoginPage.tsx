@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { loginUser } from '../../manageAuth'
 import { Colors } from '../../constants/colors'
+import { validateLoginPassword, validateUsername } from '../../utils/validation'
 import { useForm } from '@mantine/form'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
@@ -21,9 +22,8 @@ export const LoginPage = () => {
   const form = useForm({
     initialValues: { username: '', password: '' },
     validate: {
-      username: (value) =>
-        value.length < 2 ? 'Username must have at least 2 letters' : null,
-      password: (value) => (value ? null : 'Invalid password'),
+      username: validateUsername,
+      password: validateLoginPassword,
     },
   })
 
