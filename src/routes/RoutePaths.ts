@@ -4,7 +4,7 @@ export enum RoutePaths {
   Todo = ':todoId',
   NewTodo = 'new',
   NotFound = '*',
-  Login = 'login',
-  Register = 'register',
-  Offline = 'offline',
+  Login = '/login',
+  Register = '/register',
+  Offline = '/offline',
 }
