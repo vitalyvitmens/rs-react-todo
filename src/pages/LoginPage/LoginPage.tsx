@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import { RoutePaths } from '../../routes/RoutePaths'
 import { useAuth } from '../../hooks/useAuth'
 import { loginUser } from '../../manageAuth'
 import { Colors } from '../../constants/colors'
@@ -17,7 +17,7 @@ import {
 } from '@mantine/core'
 
 export const LoginPage = () => {
-  const { user, logIn, isLoading, isError } = useAuth()
+  const { logIn, isLoading, isError } = useAuth()
   const navigate = useNavigate()
   const form = useForm({
     initialValues: { username: '', password: '' },
@@ -27,15 +27,9 @@ export const LoginPage = () => {
     },
   })
 
-  useEffect(() => {
-    if (user?.username !== undefined) {
-      navigate('/', { replace: true })
-    }
-  }, [user, navigate])
-
   const handleSubmit = form.onSubmit((values) =>
     loginUser(values, () => {
-      logIn(values, () => navigate('/', { replace: true }))
+      logIn(values, () => navigate(RoutePaths.Home, { replace: true }))
     })
   )
 
@@ -67,7 +61,8 @@ export const LoginPage = () => {
         />
         <Group wrap="nowrap" mt="md">
           <NavLink
-            href="/register"
+            component={Link}
+            to={RoutePaths.Register}
             label="Ещё не зарегистрированы?"
             variant="subtle"
             active

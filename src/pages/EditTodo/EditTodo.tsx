@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { RoutePaths } from '../../routes/RoutePaths'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { useAuth } from '../../hooks/useAuth'
@@ -36,7 +37,7 @@ export const EditTodo = () => {
 
   useEffect(() => {
     if (todoId === undefined || isNaN(Number(todoId))) {
-      navigate('*')
+      navigate(RoutePaths.NotFound)
     } else {
       const id = setTimeout(() => {
         onTodoUpdate({
@@ -55,7 +56,7 @@ export const EditTodo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, title])
 
-  const handleToMainPage = () => navigate('/')
+  const handleToMainPage = () => navigate(RoutePaths.Home)
 
   if (isLoading || isError) {
     return <Stylizloader />

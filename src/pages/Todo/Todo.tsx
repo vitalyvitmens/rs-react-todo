@@ -63,7 +63,7 @@ export const Todo = () => {
     updateHtmlText()
   }, [todo?.description])
 
-  const onEditTodo = () => navigate(`/${todo?.id}`)
+  const onEditTodo = () => navigate(RoutePaths.Home + todo?.id)
 
   if (isLoading || !todo) {
     return <Stylizloader />

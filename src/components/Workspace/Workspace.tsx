@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { RoutePaths } from '../../routes/RoutePaths'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { useAuth } from '../../hooks/useAuth'
@@ -38,7 +39,7 @@ export const Workspace = () => {
     } else {
       createTodo({ title, description: value, date: new Date().toString() })
       onTodoAdd()
-      navigate('/')
+      navigate(RoutePaths.Home)
     }
   }
 

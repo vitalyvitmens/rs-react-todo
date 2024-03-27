@@ -1,3 +1,4 @@
+import { RoutePaths } from '../../routes/RoutePaths'
 import { SearchInput } from '../SearchInput/SearchInput'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { ITodo } from '../../db'
@@ -15,7 +16,7 @@ export const Sidebar = () => {
   const navigate = useNavigate()
   const onTodoSelect = (id: ITodo['id']) => {
     selectTodo(id)
-    navigate('/')
+    navigate(RoutePaths.Home)
   }
 
   const debouncedSearchInput = useDebounce(searchInput, 500)
