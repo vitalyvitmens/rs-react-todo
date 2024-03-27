@@ -1,14 +1,16 @@
-import { SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { RoutePaths } from '../../routes/RoutePaths'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
-import { ITodos } from '../../db'
+import { ITodo } from '../../db'
 import { marked } from 'marked'
+import { Colors } from '../../constants/colors'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
   Box,
   Button,
-  Loader,
   Container,
   Modal,
   Text,
@@ -19,7 +21,7 @@ import {
 } from '@mantine/core'
 
 export const Todo = () => {
-  const [todo, setTodo] = useState<ITodos>()
+  const [todo, setTodo] = useState<ITodo>()
   const {
     todo: selectedTodo,
     todos,
@@ -27,22 +29,15 @@ export const Todo = () => {
     onTodoDelete,
     selectTodo,
   } = useSelectTodo()
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
+  const isMobile = useMemo(
+    () => window.matchMedia('(max-width: 768px)').matches,
+    []
+  )
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   useEffect(() => {
     setTodo(selectedTodo)
@@ -51,70 +46,67 @@ export const Todo = () => {
   const onDeleteTodo = () => {
     deleteTodo(selectedTodo.id!)
     onTodoDelete()
-    selectTodo(todos.length - 1)
-    setTodo(todos[todos.length - 1])
+    selectTodo(todos.length)
+    setTodo(todos[todos.length - 2])
     handleClose()
   }
-
-  const onEditTodo = () => navigate(`/${todo?.id}`)
 
   const [htmlText, setHtmlText] = useState<string | null>(null)
 
   useEffect(() => {
-    if (todo?.description) {
-      const rawMarkup = marked.parse(todo.description)
-      if (rawMarkup instanceof Promise) {
-        rawMarkup.then((html: SetStateAction<string | null>) => {
-          setHtmlText(html)
-        })
-      } else {
+    const updateHtmlText = async () => {
+      if (todo?.description) {
+        const rawMarkup = await marked.parse(todo.description)
         setHtmlText(rawMarkup)
       }
     }
+    updateHtmlText()
   }, [todo?.description])
+
+  const onEditTodo = () => navigate(`/${todo?.id}`)
+
+  if (isLoading || !todo) {
+    return <Stylizloader />
+  }
 
   return (
     <Container w="100%" pt={6}>
       <Group justify="space-around" mb={10}>
         <IconTrash
-          style={{ color: '#FF0000', cursor: 'pointer' }}
+          style={{ color: Colors.red, cursor: 'pointer' }}
           onClick={handleOpen}
         />
         <Link
           style={{
             fontSize: isMobile ? '0.5rem' : '0.75rem',
             fontWeight: '700',
-            border: '2px solid #008000',
+            border: `2px solid ${Colors.green}`,
             padding: '2px 5px',
             borderRadius: '5px',
-            color: '#008000',
+            color: Colors.green,
           }}
-          to="/new"
+          to={RoutePaths.NewTodo}
         >
           Добавить заметку
         </Link>
         <IconEdit
-          style={{ color: '#0000FF', cursor: 'pointer' }}
+          style={{ color: Colors.primary, cursor: 'pointer' }}
           onClick={onEditTodo}
         />
-        <Divider size={2} w="100%" color="#0000FF" />
+        <Divider size={2} w="100%" color={Colors.primary} />
       </Group>
       <Center>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <Box>
-            <Text size="md" fw={700} pl={10} pb={10}>
-              {todo?.title}
-            </Text>
-            <Text size="xs" pb={10} c="#008000">
-              {todo?.date.slice(4, 24)}
-            </Text>
-            <TypographyStylesProvider>
-              <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
-            </TypographyStylesProvider>
-          </Box>
-        )}
+        <Box>
+          <Text size="md" fw={700} pl={10} pb={10}>
+            {todo?.title}
+          </Text>
+          <Text size="xs" pb={10} c={Colors.green}>
+            {todo?.date?.slice(4, 24)}
+          </Text>
+          <TypographyStylesProvider>
+            <div dangerouslySetInnerHTML={{ __html: htmlText ?? '' }} />
+          </TypographyStylesProvider>
+        </Box>
       </Center>
       <Modal
         opened={open}
@@ -123,7 +115,7 @@ export const Todo = () => {
         aria-describedby="modal-description"
       >
         <Container>
-          <Text id="modal-title" size="xl" fw={700} c="#0000FF">
+          <Text id="modal-title" size="xl" fw={700} c={Colors.blue}>
             Удалить заметку?
           </Text>
           <Text id="modal-description" size="md" fw={700} ta="center">
@@ -133,10 +125,10 @@ export const Todo = () => {
             mt={16}
             style={{ display: 'flex', justifyContent: 'flex-end' }}
           >
-            <Button onClick={handleClose} radius={15} color="#008000">
+            <Button onClick={handleClose} radius={15} color={Colors.green}>
               Отмена
             </Button>
-            <Button onClick={onDeleteTodo} radius={15} color="#FF0000">
+            <Button onClick={onDeleteTodo} radius={15} color={Colors.red}>
               Удалить
             </Button>
           </Group>

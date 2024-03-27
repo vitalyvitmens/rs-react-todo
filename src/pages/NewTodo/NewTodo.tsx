@@ -1,9 +1,10 @@
-import { Workspace } from "../../components/Workspace/Workspace"
+import { ComponentWithSuspense } from '../../components/ComponentWithSuspense/ComponentWithSuspense'
+import { Workspace } from '../../components/Workspace/Workspace'
 
 export const NewTodo = () => {
   return (
     <>
-      <Workspace />
+      <ComponentWithSuspense component={Workspace} />
     </>
   )
 }

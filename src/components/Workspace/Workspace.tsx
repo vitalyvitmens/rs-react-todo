@@ -1,18 +1,23 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
-import { Box, Button, Center, Input, Text } from '@mantine/core'
 import 'easymde/dist/easymde.min.css'
+import { Colors } from '../../constants/colors'
+import { errorMessages } from '../../constants/errorMessages'
+import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
+import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
+import { Box, Button, Center, Input, Text } from '@mantine/core'
+import { notificationTitles } from '../../constants/notificationTitles'
 
 export const Workspace = () => {
+  const { isLoading, isError } = useAuth()
   const [title, setTitle] = useState('')
   const [value, setValue] = useState('')
   const { onTodoAdd } = useSelectTodo()
   const navigate = useNavigate()
-
-  useEffect(() => {}, [])
 
   const onChange = useCallback((value: string) => {
     setValue(value)
@@ -23,9 +28,22 @@ export const Workspace = () => {
   }, [])
 
   const onSubmint = () => {
-    createTodo({ title, description: value, date: new Date().toString() })
-    onTodoAdd()
-    navigate('/')
+    if (!title) {
+      ErrorNotification({
+        title: notificationTitles.error,
+        message: errorMessages.noDataForTodo,
+      })
+
+      return
+    } else {
+      createTodo({ title, description: value, date: new Date().toString() })
+      onTodoAdd()
+      navigate('/')
+    }
+  }
+
+  if (isLoading || isError) {
+    return <Stylizloader />
   }
 
   return (
@@ -52,7 +70,7 @@ export const Workspace = () => {
         onChange={onChange}
       />
       <Center>
-        <Button onClick={onSubmint} fullWidth color="#008000" radius={5}>
+        <Button onClick={onSubmint} fullWidth color={Colors.green} radius={5}>
           Save
         </Button>
       </Center>

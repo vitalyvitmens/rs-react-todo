@@ -1,8 +1,8 @@
 import Dexie, { Table } from 'dexie'
 
 class MyAppDatabase extends Dexie {
-  todos!: Table<ITodos, number>
-  users!: Table<IUsers, number>
+  todos!: Table<ITodo, number>
+  users!: Table<IUser, number>
 
   constructor() {
     super('TodosDB')
@@ -13,13 +13,13 @@ class MyAppDatabase extends Dexie {
   }
 }
 
-export interface ITodos {
+export interface ITodo {
   id?: number
   title: string
   description: string
   date: string
 }
-export interface IUsers {
+export interface IUser {
   id?: number
   username: string
   password: string

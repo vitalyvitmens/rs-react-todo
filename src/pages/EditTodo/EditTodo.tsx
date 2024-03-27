@@ -2,9 +2,13 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
+import { useAuth } from '../../hooks/useAuth'
+import { Colors } from '../../constants/colors'
+import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
 
 export const EditTodo = () => {
+  const { isLoading, isError } = useAuth()
   const { todoId } = useParams()
   const {
     selectTodo,
@@ -31,23 +35,31 @@ export const EditTodo = () => {
   }, [])
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      onTodoUpdate({
-        id: Number(todoId),
-        title,
-        description: value,
-        date: new Date().toString(),
-      })
-      onTodoAdd()
-    }, 1000)
+    if (todoId === undefined || isNaN(Number(todoId))) {
+      navigate('*')
+    } else {
+      const id = setTimeout(() => {
+        onTodoUpdate({
+          id: Number(todoId),
+          title,
+          description: value,
+          date: new Date().toString(),
+        })
+        onTodoAdd()
+      }, 2000)
 
-    return () => {
-      clearTimeout(id)
+      return () => {
+        clearTimeout(id)
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, title])
 
   const handleToMainPage = () => navigate('/')
+
+  if (isLoading || isError) {
+    return <Stylizloader />
+  }
 
   return (
     <Box p={10}>
@@ -72,7 +84,12 @@ export const EditTodo = () => {
         onChange={onChange}
       />
       <Center>
-        <Button onClick={handleToMainPage} fullWidth color="#008000" radius={5}>
+        <Button
+          onClick={handleToMainPage}
+          fullWidth
+          color={Colors.green}
+          radius={5}
+        >
           To Home Page
         </Button>
       </Center>

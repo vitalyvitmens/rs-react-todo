@@ -1,21 +1,21 @@
 import { ReactNode, createContext, useState } from 'react'
-import { IUsers } from '../db'
+import { IUser } from '../db'
 import { getUser } from '../manageAuth'
-import { DefaultNotification } from '../components/MantineNotifications/DefaultNotification/DefaultNotification'
+import { DefaultNotification } from '../components/Mantine/DefaultNotification/DefaultNotification'
+import { notificationTitles } from '../constants/notificationTitles'
+import { successMessages } from '../constants/successMessages'
 
 interface AuthContextType {
-  user: IUsers | undefined
+  user: IUser | undefined
   isLoading: boolean
-  isSuccess: boolean
   isError: boolean
-  logIn: (newUser: IUsers, callback: () => void) => void
+  logIn: (newUser: IUser, callback: () => void) => void
   logOut: (callback: () => void) => void
 }
 
 export const AuthContext = createContext<AuthContextType>({
   user: undefined,
   isLoading: false,
-  isSuccess: false,
   isError: false,
   logIn() {},
   logOut() {},
@@ -26,21 +26,19 @@ export interface IProviderProps {
 }
 
 export const AuthProvider = ({ children }: IProviderProps) => {
-  const [user, setUser] = useState<IUsers | undefined>(
+  const [user, setUser] = useState<IUser | undefined>(
     () => JSON.parse(localStorage.getItem('user-rs-react-todo') || '{}') || null
   )
   const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 
-  const logIn = async (newUser: IUsers, callback: () => void) => {
+  const logIn = async (newUser: IUser, callback: () => void) => {
     setIsLoading(true)
     const user = await getUser(newUser)
-    if (typeof user === 'undefined') {
+    if (user === undefined) {
       setIsLoading(false)
       setIsError(true)
     } else {
-      setIsSuccess(true)
       localStorage.setItem('user-rs-react-todo', JSON.stringify(user))
       setIsLoading(false)
       setUser(user)
@@ -52,8 +50,8 @@ export const AuthProvider = ({ children }: IProviderProps) => {
     setUser(undefined)
     localStorage.removeItem('user-rs-react-todo')
     DefaultNotification({
-      title: 'Success',
-      message: `Пользователь ${user?.username} вышел из системы`,
+      title: notificationTitles.success,
+      message: successMessages.userLoggedOut(user?.username),
     })
 
     callback()
@@ -62,7 +60,6 @@ export const AuthProvider = ({ children }: IProviderProps) => {
   const value = {
     user,
     isLoading,
-    isSuccess,
     isError,
     logIn,
     logOut,

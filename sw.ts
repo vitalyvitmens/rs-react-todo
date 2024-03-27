@@ -10,6 +10,9 @@ const ASSETS: Asset[] = [
   '/src/index.css',
   '/src/main.tsx',
   '/src/App.tsx',
+  '@mantine/core/styles.css',
+  '@mantine/notifications/styles.css',
+  '/db.ts',
 ]
 
 // install event
