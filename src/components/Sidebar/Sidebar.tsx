@@ -4,6 +4,7 @@ import { ITodos } from '../../db'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDebounce } from '../../hooks/useDebounce'
+import { Colors } from '../../constants/colors'
 import { Box, Divider, Group, Text } from '@mantine/core'
 
 export const Sidebar = () => {
@@ -46,7 +47,7 @@ export const Sidebar = () => {
   }, [debouncedSearchInput])
 
   return (
-    <Box w="38%" style={{ borderRight: '2px solid #FFC94C' }}>
+    <Box w="38%" style={{ borderRight: `2px solid ${Colors.primary}` }}>
       <SearchInput setSearchInput={setSearchInput} />
       {filteredTodos.map((todo) => {
         return (
@@ -60,13 +61,13 @@ export const Sidebar = () => {
             <Text size="md" fw={700} pl={10} truncate="end">
               {todo.title}
             </Text>
-            <Text size="xs" w={600} c="#008000">
+            <Text size="xs" w={600} c={Colors.success}>
               {todo.date.slice(4, 24)}
             </Text>
             <Text size="sm" truncate="end">
               {todo.description}
             </Text>
-            <Divider w="97%" pb={5} color="#000" />
+            <Divider w="97%" pb={5} color={Colors.black} />
           </Group>
         )
       })}

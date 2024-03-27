@@ -6,6 +6,7 @@ import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
 import { ITodos } from '../../db'
 import { marked } from 'marked'
+import { Colors } from '../../constants/colors'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
   Box,
@@ -72,34 +73,34 @@ export const Todo = () => {
     <Container w="100%" pt={6}>
       <Group justify="space-around" mb={10}>
         <IconTrash
-          style={{ color: '#FF0000', cursor: 'pointer' }}
+          style={{ color: Colors.red, cursor: 'pointer' }}
           onClick={handleOpen}
         />
         <Link
           style={{
             fontSize: isMobile ? '0.5rem' : '0.75rem',
             fontWeight: '700',
-            border: '2px solid #008000',
+            border: `2px solid ${Colors.green}`,
             padding: '2px 5px',
             borderRadius: '5px',
-            color: '#008000',
+            color: Colors.green,
           }}
           to={RoutePaths.NewTodo}
         >
           Добавить заметку
         </Link>
         <IconEdit
-          style={{ color: '#FFC94C', cursor: 'pointer' }}
+          style={{ color: Colors.primary, cursor: 'pointer' }}
           onClick={onEditTodo}
         />
-        <Divider size={2} w="100%" color="#FFC94C" />
+        <Divider size={2} w="100%" color={Colors.primary} />
       </Group>
       <Center>
         <Box>
           <Text size="md" fw={700} pl={10} pb={10}>
             {todo?.title}
           </Text>
-          <Text size="xs" pb={10} c="#008000">
+          <Text size="xs" pb={10} c={Colors.green}>
             {todo?.date?.slice(4, 24)}
           </Text>
           <TypographyStylesProvider>
@@ -114,7 +115,7 @@ export const Todo = () => {
         aria-describedby="modal-description"
       >
         <Container>
-          <Text id="modal-title" size="xl" fw={700} c="#0000FF">
+          <Text id="modal-title" size="xl" fw={700} c={Colors.blue}>
             Удалить заметку?
           </Text>
           <Text id="modal-description" size="md" fw={700} ta="center">
@@ -124,10 +125,10 @@ export const Todo = () => {
             mt={16}
             style={{ display: 'flex', justifyContent: 'flex-end' }}
           >
-            <Button onClick={handleClose} radius={15} color="#008000">
+            <Button onClick={handleClose} radius={15} color={Colors.green}>
               Отмена
             </Button>
-            <Button onClick={onDeleteTodo} radius={15} color="#FF0000">
+            <Button onClick={onDeleteTodo} radius={15} color={Colors.red}>
               Удалить
             </Button>
           </Group>

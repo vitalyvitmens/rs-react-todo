@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../../manageAuth'
 import { useAuth } from '../../hooks/useAuth'
+import { Colors } from '../../constants/colors'
 import { useForm } from '@mantine/form'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import {
@@ -51,14 +52,14 @@ export const RegisterPage = () => {
 
   return (
     <Box maw={340} mx="auto" mt={100}>
-      <Title ta="center" c="#0000FF">
+      <Title ta="center" c={Colors.blue}>
         Registration
       </Title>
       <form onSubmit={handleSubmit}>
         <TextInput
           id="register-username"
           radius={5}
-          c="#FFC94C"
+          c={Colors.primary}
           label="Username"
           placeholder="Username"
           {...form.getInputProps('username')}
@@ -66,7 +67,7 @@ export const RegisterPage = () => {
         <PasswordInput
           id="register-password"
           radius={5}
-          c="#FFC94C"
+          c={Colors.primary}
           label="Password"
           placeholder="Password"
           {...form.getInputProps('password')}
@@ -74,7 +75,7 @@ export const RegisterPage = () => {
         <PasswordInput
           id="register-confirm-password"
           radius={5}
-          c="#FFC94C"
+          c={Colors.primary}
           label="Confirm password"
           placeholder="Confirm password"
           {...form.getInputProps('confirmPassword')}
@@ -85,7 +86,7 @@ export const RegisterPage = () => {
             label="Уже зарегистрированы?"
             variant="subtle"
             active
-            c="#FF0000"
+            c={Colors.red}
             fw="bold"
           />
           <Button type="submit" w="120px" bg="#006400" radius={5}>

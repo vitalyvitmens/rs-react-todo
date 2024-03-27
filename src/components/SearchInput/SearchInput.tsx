@@ -1,3 +1,4 @@
+import { Colors } from '../../constants/colors'
 import { Box, Divider, Input } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
 
@@ -16,7 +17,7 @@ export const SearchInput = ({ setSearchInput }: SearchInputType) => {
         rightSection={<IconSearch size={24} />}
         onChange={(e) => setSearchInput(e.target.value)}
       />
-      <Divider size={2} w="100%" mt={10} color="#FFC94C" />
+      <Divider size={2} w="100%" mt={10} color={Colors.primary} />
     </Box>
   )
 }

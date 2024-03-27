@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
+import { Colors } from '../../constants/colors'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Center, Text } from '@mantine/core'
 
@@ -41,7 +42,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <Center pt="25%" ml={30} mr={10}>
-          <Text size="5rem" fw={800} c="#FF0000">
+          <Text size="5rem" fw={800} c={Colors.red}>
             Что-то пошло не так!
           </Text>
         </Center>

@@ -5,6 +5,7 @@ import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
 import 'easymde/dist/easymde.min.css'
+import { Colors } from '../../constants/colors'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
@@ -69,7 +70,7 @@ export const Workspace = () => {
         onChange={onChange}
       />
       <Center>
-        <Button onClick={onSubmint} fullWidth color="#008000" radius={5}>
+        <Button onClick={onSubmint} fullWidth color={Colors.green} radius={5}>
           Save
         </Button>
       </Center>
