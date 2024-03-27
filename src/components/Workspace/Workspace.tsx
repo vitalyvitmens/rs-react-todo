@@ -6,9 +6,11 @@ import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
 import 'easymde/dist/easymde.min.css'
 import { Colors } from '../../constants/colors'
+import { errorMessages } from '../../constants/errorMessages'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
+import { notificationTitles } from '../../constants/notificationTitles'
 
 export const Workspace = () => {
   const { isLoading, isError } = useAuth()
@@ -30,8 +32,8 @@ export const Workspace = () => {
   const onSubmint = () => {
     if (!title) {
       ErrorNotification({
-        title: 'Error',
-        message: `Нет данных для создания Todo, заполните хотя бы заголовок`,
+        title: notificationTitles.error,
+        message: errorMessages.noDataForTodo,
       })
 
       return

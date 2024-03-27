@@ -2,6 +2,8 @@ import { Component, ErrorInfo, ReactNode } from 'react'
 import { Colors } from '../../constants/colors'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Center, Text } from '@mantine/core'
+import { notificationTitles } from '../../constants/notificationTitles'
+import { errorMessages } from '../../constants/errorMessages'
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -22,8 +24,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     ErrorNotification({
-      title: 'Error Boundary',
-      message: `Error message from getDerivedStateFromError: ${error.message}`,
+      title: notificationTitles.errorBoundary,
+      message: errorMessages.getDerivedStateFromError(error),
     })
 
     return {
@@ -33,8 +35,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     ErrorNotification({
-      title: 'Error Boundary',
-      message: `Error message from componentDidCatch: ${error.message}\nError info from componentDidCatch: ${errorInfo.componentStack}`,
+      title: notificationTitles.errorBoundary,
+      message: errorMessages.componentDidCatch(error, errorInfo),
     })
   }
 

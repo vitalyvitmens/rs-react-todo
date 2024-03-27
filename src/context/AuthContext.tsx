@@ -2,6 +2,8 @@ import { ReactNode, createContext, useState } from 'react'
 import { IUsers } from '../db'
 import { getUser } from '../manageAuth'
 import { DefaultNotification } from '../components/Mantine/DefaultNotification/DefaultNotification'
+import { notificationTitles } from '../constants/notificationTitles'
+import { successMessages } from '../constants/successMessages'
 
 interface AuthContextType {
   user: IUsers | undefined
@@ -52,8 +54,8 @@ export const AuthProvider = ({ children }: IProviderProps) => {
     setUser(undefined)
     localStorage.removeItem('user-rs-react-todo')
     DefaultNotification({
-      title: 'Success',
-      message: `Пользователь ${user?.username} вышел из системы`,
+      title: notificationTitles.success,
+      message: successMessages.userLoggedOut(user?.username),
     })
 
     callback()

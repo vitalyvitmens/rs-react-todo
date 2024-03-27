@@ -2,6 +2,7 @@ import { createContext, useState } from 'react'
 import { ITodos } from '../db'
 import { readTodo, readTodos, updateTodo } from '../manageData'
 import { IProviderProps } from './AuthContext'
+import { notificationTitles } from '../constants/notificationTitles'
 
 interface TodosContextType {
   todo: ITodos
@@ -22,7 +23,7 @@ interface TodosContextType {
 export const TodoContext = createContext<TodosContextType>({
   todo: {
     id: 1,
-    title: 'React TS',
+    title: notificationTitles.reactTS,
     date: '10.03.2024',
     description: 'Frontend',
   },
