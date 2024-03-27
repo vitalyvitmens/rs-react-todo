@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { ComponentWithSuspense } from '../../components/ComponentWithSuspense/ComponentWithSuspense'
 import { Sidebar } from '../../components/Sidebar/Sidebar'
+import { Colors } from '../../constants/colors'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import { Button, Center, Container } from '@mantine/core'
 
@@ -31,7 +32,7 @@ export const HomePage = () => {
           bg="bisque"
           style={{
             display: 'flex',
-            border: '2px solid #FFC94C',
+            border: `2px solid ${Colors.primary}`,
             borderRadius: '10px',
             boxShadow: '-5px -4px 10px black',
           }}

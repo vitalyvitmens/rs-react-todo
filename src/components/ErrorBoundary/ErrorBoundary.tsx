@@ -1,6 +1,9 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
+import { Colors } from '../../constants/colors'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Center, Text } from '@mantine/core'
+import { notificationTitles } from '../../constants/notificationTitles'
+import { errorMessages } from '../../constants/errorMessages'
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -21,8 +24,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     ErrorNotification({
-      title: 'Error Boundary',
-      message: `Error message from getDerivedStateFromError: ${error.message}`,
+      title: notificationTitles.errorBoundary,
+      message: errorMessages.getDerivedStateFromError(error),
     })
 
     return {
@@ -32,8 +35,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     ErrorNotification({
-      title: 'Error Boundary',
-      message: `Error message from componentDidCatch: ${error.message}\nError info from componentDidCatch: ${errorInfo.componentStack}`,
+      title: notificationTitles.errorBoundary,
+      message: errorMessages.componentDidCatch(error, errorInfo),
     })
   }
 
@@ -41,7 +44,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <Center pt="25%" ml={30} mr={10}>
-          <Text size="5rem" fw={800} c="#FF0000">
+          <Text size="5rem" fw={800} c={Colors.red}>
             Что-то пошло не так!
           </Text>
         </Center>

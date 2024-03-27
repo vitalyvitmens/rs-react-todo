@@ -1,35 +1,34 @@
 import { createContext, useState } from 'react'
-import { ITodos } from '../db'
+import { ITodo } from '../db'
 import { readTodo, readTodos, updateTodo } from '../manageData'
 import { IProviderProps } from './AuthContext'
+import { notificationTitles } from '../constants/notificationTitles'
 
 interface TodosContextType {
-  todo: ITodos
-  todos: ITodos[]
+  todo: ITodo
+  todos: ITodo[]
   isTodoAdded: number
   isLoading: boolean
-  isSuccess: boolean
   isError: boolean
   isTodoUpdating: boolean
   isTodoUpdated: boolean
-  selectTodo: (id: ITodos['id']) => void
+  selectTodo: (id: ITodo['id']) => void
   getTodos: () => void
   onTodoAdd: () => void
   onTodoDelete: () => void
-  onTodoUpdate: ({ id, title, description }: ITodos) => void
+  onTodoUpdate: ({ id, title, description }: ITodo) => void
 }
 
 export const TodoContext = createContext<TodosContextType>({
   todo: {
     id: 1,
-    title: 'React TS',
+    title: notificationTitles.reactTS,
     date: '10.03.2024',
     description: 'Frontend',
   },
   todos: [],
   isTodoAdded: 0,
   isLoading: false,
-  isSuccess: false,
   isError: false,
   isTodoUpdating: false,
   isTodoUpdated: false,
@@ -41,14 +40,13 @@ export const TodoContext = createContext<TodosContextType>({
 })
 
 export const TodoProvider = ({ children }: IProviderProps) => {
-  const [todo, setTodo] = useState<ITodos>(
+  const [todo, setTodo] = useState<ITodo>(
     () => JSON.parse(localStorage.getItem('todo-rs-react-todo') || '{}') || null
   )
-  const [todos, setTodos] = useState<ITodos[]>([])
+  const [todos, setTodos] = useState<ITodo[]>([])
   const [isTodoAdded, setIsTodoAdded] = useState(0)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 
   const [isTodosLoading, setIsTodosLoading] = useState(false)
@@ -59,14 +57,13 @@ export const TodoProvider = ({ children }: IProviderProps) => {
   const [isTodoUpdated, setIsTodoUpdated] = useState(false)
   const [isTodoUpdateError, setIsTodoUpdateError] = useState(false)
 
-  const selectTodo = async (todoId: ITodos['id']) => {
+  const selectTodo = async (todoId: ITodo['id']) => {
     setIsLoading(true)
     const todo = await readTodo(todoId)
     if (typeof todo === 'undefined') {
       setIsLoading(false)
       setIsError(true)
     } else {
-      setIsSuccess(true)
       setIsError(true)
       setIsLoading(false)
       setTodo(todo)
@@ -87,7 +84,7 @@ export const TodoProvider = ({ children }: IProviderProps) => {
     }
   }
 
-  const onTodoUpdate = async ({ id, title, description }: ITodos) => {
+  const onTodoUpdate = async ({ id, title, description }: ITodo) => {
     setIsTodoUpdating(true)
     try {
       await updateTodo({
@@ -118,7 +115,6 @@ export const TodoProvider = ({ children }: IProviderProps) => {
     onTodoDelete,
     todos,
     isLoading,
-    isSuccess,
     isError,
     isTodosLoading,
     isTodosSuccess,

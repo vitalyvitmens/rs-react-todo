@@ -1,13 +1,16 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { useAuth } from '../../hooks/useAuth'
 import { createTodo } from '../../manageData'
 import 'easymde/dist/easymde.min.css'
+import { Colors } from '../../constants/colors'
+import { errorMessages } from '../../constants/errorMessages'
 import { ErrorNotification } from '../Mantine/ErrorNotification/ErrorNotification'
 import { Stylizloader } from '../Mantine/Stylizloader/Stylizloader'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
+import { notificationTitles } from '../../constants/notificationTitles'
 
 export const Workspace = () => {
   const { isLoading, isError } = useAuth()
@@ -15,8 +18,6 @@ export const Workspace = () => {
   const [value, setValue] = useState('')
   const { onTodoAdd } = useSelectTodo()
   const navigate = useNavigate()
-
-  useEffect(() => {}, [])
 
   const onChange = useCallback((value: string) => {
     setValue(value)
@@ -29,8 +30,8 @@ export const Workspace = () => {
   const onSubmint = () => {
     if (!title) {
       ErrorNotification({
-        title: 'Error',
-        message: `Нет данных для создания Todo, заполните хотя бы заголовок`,
+        title: notificationTitles.error,
+        message: errorMessages.noDataForTodo,
       })
 
       return
@@ -69,7 +70,7 @@ export const Workspace = () => {
         onChange={onChange}
       />
       <Center>
-        <Button onClick={onSubmint} fullWidth color="#008000" radius={5}>
+        <Button onClick={onSubmint} fullWidth color={Colors.green} radius={5}>
           Save
         </Button>
       </Center>

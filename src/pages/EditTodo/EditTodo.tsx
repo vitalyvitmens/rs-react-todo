@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { useAuth } from '../../hooks/useAuth'
+import { Colors } from '../../constants/colors'
 import { Stylizloader } from '../../components/Mantine/Stylizloader/Stylizloader'
 import { Box, Button, Center, Input, Text } from '@mantine/core'
 
@@ -83,7 +84,12 @@ export const EditTodo = () => {
         onChange={onChange}
       />
       <Center>
-        <Button onClick={handleToMainPage} fullWidth color="#008000" radius={5}>
+        <Button
+          onClick={handleToMainPage}
+          fullWidth
+          color={Colors.green}
+          radius={5}
+        >
           To Home Page
         </Button>
       </Center>
