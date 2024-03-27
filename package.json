@@ -2,7 +2,7 @@
   "name": "rs-react-todo",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://vitalyvitmens.github.io/rs-react-todo/#",
+  "homepage": "https://vitalyvitmens.github.io/rs-react-todo",
   "type": "module",
   "scripts": {
     "dev": "vite",
