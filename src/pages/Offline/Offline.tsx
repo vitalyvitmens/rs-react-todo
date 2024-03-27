@@ -1,3 +1,4 @@
+import { RoutePaths } from '../../routes/RoutePaths'
 import { Alert, Button, Text, Box, Title, Group } from '@mantine/core'
 import { Link } from 'react-router-dom'
 
@@ -13,7 +14,7 @@ export const Offline = () => {
           Sorry this page isn't available offline
         </Text>
         <Button radius={5}>
-          <Link to="/">Back To Home Page</Link>
+          <Link to={RoutePaths.Home}>Back To Home Page</Link>
         </Button>
       </Group>
     </Box>

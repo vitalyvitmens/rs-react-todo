@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { RoutePaths } from '../../routes/RoutePaths'
 import { IconTrash, IconEdit } from '@tabler/icons-react'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
 import { deleteTodo } from '../../manageData'
@@ -83,7 +84,7 @@ export const Todo = () => {
             borderRadius: '5px',
             color: '#008000',
           }}
-          to="/new"
+          to={RoutePaths.NewTodo}
         >
           Добавить заметку
         </Link>

@@ -1,4 +1,5 @@
 import { RouteObject } from 'react-router-dom'
+import { RoutePaths } from './RoutePaths'
 import EditTodo from '../pages/EditTodo/EditTodo.lazy'
 import HomePage from '../layout/HomePage/HomePage.lazy'
 import LoginPage from '../pages/LoginPage/LoginPage.lazy'
@@ -7,7 +8,6 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.lazy'
 import Offline from '../pages/Offline/Offline.lazy'
 import RegisterPage from '../pages/RegisterPage/RegisterPage.lazy'
 import Todo from '../pages/Todo/Todo.lazy'
-import { RoutePaths } from './RoutePaths' // Импортируем enum
 
 export const routes: RouteObject[] = [
   {
