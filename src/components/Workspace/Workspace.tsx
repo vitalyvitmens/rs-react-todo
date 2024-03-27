@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SimpleMdeReact from 'react-simplemde-editor'
 import { useSelectTodo } from '../../hooks/useSelectTodo'
@@ -18,8 +18,6 @@ export const Workspace = () => {
   const [value, setValue] = useState('')
   const { onTodoAdd } = useSelectTodo()
   const navigate = useNavigate()
-
-  useEffect(() => {}, [])
 
   const onChange = useCallback((value: string) => {
     setValue(value)
