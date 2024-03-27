@@ -5,7 +5,7 @@ type Asset = string
 const staticCache: string = 'static-site-todo-v1'
 const dynamicCache: string = 'dynamic-site-todo-v1'
 const ASSETS: Asset[] = [
-  '/rs-react-todo/',
+  '/',
   '/index.html',
   '/src/index.css',
   '/src/main.tsx',
