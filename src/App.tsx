@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 import { TodoProvider } from './context/TodoContext'
-import { routes } from './routes'
+import { routes } from './routes/routes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 
 export const App = () => {
