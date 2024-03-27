@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: IProviderProps) => {
   const logIn = async (newUser: IUser, callback: () => void) => {
     setIsLoading(true)
     const user = await getUser(newUser)
-    if (typeof user === 'undefined') {
+    if (user === undefined) {
       setIsLoading(false)
       setIsError(true)
     } else {
