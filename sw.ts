@@ -5,14 +5,14 @@ type Asset = string
 const staticCache: string = 'static-site-todo-v1'
 const dynamicCache: string = 'dynamic-site-todo-v1'
 const ASSETS: Asset[] = [
-  '/',
-  '/index.html',
-  '/src/index.css',
-  '/src/main.tsx',
-  '/src/App.tsx',
+  '/rs-react-todo/',
+  '/rs-react-todo/index.html',
+  '/rs-react-todo/src/index.css',
+  '/rs-react-todo/src/main.tsx',
+  '/rs-react-todo/src/App.tsx',
   '@mantine/core/styles.css',
   '@mantine/notifications/styles.css',
-  '/db.ts',
+  '/rs-react-todo/db.ts',
 ]
 
 // install event
