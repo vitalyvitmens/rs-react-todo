@@ -20,9 +20,9 @@ const manifestForPlugin = {
       | 'landscape'
       | 'landscape-primary'
       | 'landscape-secondary',
-    scope: '/index.html',
-    id: '/index.html',
-    start_url: '/index.html',
+    scope: '/rs-react-todo/',
+    id: '/rs-react-todo/',
+    start_url: '/rs-react-todo/',
     screenshots: [
       {
         src: '/rs-react-todo/src/assets/screenshots/screenshot-1900x920.png',
