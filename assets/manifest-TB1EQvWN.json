@@ -1,0 +1,79 @@
+{
+  "name": "ToDo",
+  "short_name": "ToDo",
+  "description": "ToDo App",
+  "theme_color": "#000000",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/rs-react-todo/",
+  "id": "/rs-react-todo/",
+  "start_url": "/rs-react-todo/",
+  "display_override": ["window-controls-overlay"],
+  "screenshots": [
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/screenshots/screenshot-1900x920.png?raw=true",
+      "sizes": "1900x920",
+      "type": "image/png",
+      "form_factor": "wide",
+      "platform": "web"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/screenshots/screenshot-375x667.png?raw=true",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "platform": "web"
+    }
+  ],
+  "icons": [
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-48x48.png?raw=true",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-72x72.png?raw=true",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-96x96.png?raw=true",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-128x128.png?raw=true",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-144x144.png?raw=true",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-152x152.png?raw=true",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-192x192.png?raw=true",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-384x384.png?raw=true",
+      "sizes": "384x384",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "https://github.com/vitalyvitmens/rs-react-todo/blob/main/src/assets/icons/icon-512x512.png?raw=true",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}
