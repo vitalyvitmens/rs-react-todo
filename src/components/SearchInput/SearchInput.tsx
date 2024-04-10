@@ -13,7 +13,7 @@ export const SearchInput = ({ setSearchInput }: SearchInputProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
     setInputValue(newValue)
-    setSearchInput(newValue)
+    setSearchInput(newValue.toLowerCase())
   }
 
   return (
