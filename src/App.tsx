@@ -16,7 +16,7 @@ export const App = () => {
                 key={route.element?.toString()}
                 path={route.path}
                 element={
-                  <ErrorBoundary>
+                  <ErrorBoundary key={location.pathname}>
                     {route.children ? (
                       <PrivateRoute
                         route={route}
